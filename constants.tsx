@@ -10,7 +10,7 @@ export const NAV_ITEMS: NavItem[] = [
 
 export const HERO_IMAGES = [
   'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772933694/S2_vfdkqs.jpg',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772713173/S1_r5jplr.jpg',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1773013740/S1_r5jplr.jpg',
   'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772713181/B2_iqcx17.jpg',
   'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772713182/B1_xlx2bi.jpg',
   'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772713173/H2_psxg4f.jpg',
