@@ -17,21 +17,21 @@ const Contact: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-8 w-full">
             <div className="flex flex-col justify-between shrink-0">
               <div>
-                <h4 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Office 辦公室</h4>
+                <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Office 辦公室</h3>
                 <p className="text-sm font-light tracking-widest leading-relaxed uppercase">
                   三重區中正北路15號5樓5-60<br />
                   新北市，台灣 TAIWAN
                 </p>
               </div>
               <div>
-                <h4 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Contact 聯繫方式</h4>
+                <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Contact 聯繫方式</h3>
                 <p className="text-sm font-light tracking-widest">
                   w6988215@gmail.com<br />
                   0955305817
                 </p>
               </div>
               <div>
-                <h4 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Social Media 社交媒體</h4>
+                <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Social Media 社交媒體</h3>
                 <div className="flex space-x-6 pt-2">
                   <a href="https://www.youtube.com/@TheWayneFang" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity"><Youtube size={20} strokeWidth={1.5} /></a>
                   <a href="https://www.facebook.com/KaiFirstDesign/" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity"><Facebook size={20} strokeWidth={1.5} /></a>

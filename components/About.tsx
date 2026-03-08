@@ -26,7 +26,7 @@ const About: React.FC = () => {
         <div className="flex flex-col h-full">
           {/* Philosophy Header */}
           <div className="mb-8">
-            <span className="text-[10px] tracking-[0.4em] opacity-40 block mb-6 uppercase">PHILOSOPHY 設計理念</span>
+            <h2 className="text-[10px] tracking-[0.4em] opacity-40 block mb-6 uppercase">PHILOSOPHY 設計理念</h2>
             
             <div className="space-y-6 text-zinc-800 dark:text-zinc-200">
               <div className="space-y-1">
@@ -53,7 +53,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-[0.8fr_1.2fr] gap-x-4 gap-y-8 mb-8">
             {/* Awards Column */}
             <div>
-              <h4 className="text-xl font-serif mb-4 uppercase tracking-wide text-zinc-800 dark:text-zinc-200">AWARDS</h4>
+              <h3 className="text-xl font-serif mb-4 uppercase tracking-wide text-zinc-800 dark:text-zinc-200">AWARDS</h3>
               <div className="space-y-4 text-zinc-600 dark:text-zinc-400">
                 <div className="border-l-2 border-zinc-300 pl-4">
                   <p className="text-sm">
@@ -85,7 +85,7 @@ const About: React.FC = () => {
 
             {/* Education Column */}
             <div>
-              <h4 className="text-xl font-serif mb-4 uppercase tracking-wide text-zinc-800 dark:text-zinc-200">EDUCATION & Technician Certificate</h4>
+              <h3 className="text-xl font-serif mb-4 uppercase tracking-wide text-zinc-800 dark:text-zinc-200">EDUCATION & Technician Certificate</h3>
               <div className="space-y-6 text-zinc-600 dark:text-zinc-400">
                 <div className="border-l-2 border-zinc-300 pl-4">
                   <p className="text-sm font-medium">China University of Technology</p>
@@ -108,7 +108,7 @@ const About: React.FC = () => {
 
           {/* Experiences Section */}
           <div>
-            <h4 className="text-xl font-serif mb-4 uppercase tracking-wide text-zinc-800 dark:text-zinc-200">EXPERIENCES</h4>
+            <h3 className="text-xl font-serif mb-4 uppercase tracking-wide text-zinc-800 dark:text-zinc-200">EXPERIENCES</h3>
             <div className="flex flex-wrap items-center gap-x-4 text-zinc-600 dark:text-zinc-400 border-l-2 border-zinc-300 pl-4">
               <span className="text-sm font-medium">Just Design (均典設計)</span>
               <span className="text-sm font-medium">Vouge Design (峰閣設計)</span>
