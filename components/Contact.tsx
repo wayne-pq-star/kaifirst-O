@@ -26,7 +26,7 @@ const Contact: React.FC = () => {
               <div>
                 <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Contact 聯繫方式</h3>
                 <p className="text-sm font-light tracking-widest">
-                  w6988215@gmail.com<br />
+                  service@kaifirst-design.com<br />
                   0955305817
                 </p>
               </div>
