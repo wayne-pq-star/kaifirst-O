@@ -67,11 +67,11 @@ const Work: React.FC = () => {
   // Simple mapping for category translation
   const categoryLabels: Record<string, string> = {
     [ProjectCategory.ALL]: 'ALL 全部',
-    [ProjectCategory.RESIDENTIAL]: 'RESIDENTIAL 住宅',
-    [ProjectCategory.COMMERCIAL]: 'COMMERCIAL 商業',
-    [ProjectCategory.AWARDS]: 'AWARDS 得獎作品',
-    [ProjectCategory.AI]: 'AI 創意',
-    [ProjectCategory.FIRST_DESIGN]: 'First 初設計',
+    [ProjectCategory.RESIDENTIAL]: '￭ RESIDENTIAL 住宅',
+    [ProjectCategory.COMMERCIAL]: '￭ COMMERCIAL 商業',
+    [ProjectCategory.AWARDS]: '￭ AWARDS 得獎作品',
+    [ProjectCategory.AI]: '￭ AI 創意',
+    [ProjectCategory.FIRST_DESIGN]: '￭ First 初設計',
   };
 
   // Prevent scrolling when modal is open
@@ -108,13 +108,18 @@ const Work: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProjects.map((project) => (
-          <div 
-            key={project.id} 
-            className="group cursor-pointer"
-            onClick={() => setSelectedProject(project)}
-          >
-            <div className="relative overflow-hidden aspect-[4/3] mb-2 bg-zinc-100 dark:bg-zinc-900">
+        {filteredProjects.map((project) => {
+          const isHiddenOnMobile = 
+            activeCategory === ProjectCategory.ALL && 
+            ['1', 'things-stars-shift', 'guinness-station'].includes(project.id);
+            
+          return (
+            <div 
+              key={project.id} 
+              className={`group cursor-pointer ${isHiddenOnMobile ? 'hidden md:block' : ''}`}
+              onClick={() => setSelectedProject(project)}
+            >
+              <div className="relative overflow-hidden aspect-[4/3] mb-2 bg-zinc-100 dark:bg-zinc-900">
               <img
                 src={project.image}
                 alt={project.title}
@@ -134,7 +139,8 @@ const Work: React.FC = () => {
               <span className="text-[10px] opacity-30 font-light flex-shrink-0">{project.year}</span>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Gallery Modal */}

@@ -89,13 +89,13 @@ const About: React.FC = () => {
               <div className="space-y-6 text-zinc-600 dark:text-zinc-400">
                 <div className="border-l-2 border-zinc-300 pl-4">
                   <p className="text-sm font-medium">China University of Technology</p>
-                  <p className="text-sm italic opacity-80">Bachelor of Interior design</p>
+                  <p className="text-sm italic opacity-80">學士 Bachelor of Interior design</p>
                   <p className="text-sm">中國科技大學-室內設計系</p>
                 </div>
                 <div className="border-l-2 border-zinc-300 pl-4">
                   <p className="text-sm font-medium whitespace-nowrap">National Taiwan University of Science and Technology</p>
-                  <p className="text-sm italic opacity-80">Master of Science in Engineering</p>
-                  <p className="text-sm italic opacity-80">Bachelor of Science in Engineering</p>
+                  <p className="text-sm italic opacity-80">碩士 Master of Science in Engineering</p>
+                  <p className="text-sm italic opacity-80">學士 Bachelor of Science in Engineering</p>
                   <p className="text-sm">國立台灣科技大學-機械工程系</p>
                 </div>
                 <div className="border-l-2 border-zinc-300 pl-4">

@@ -52,8 +52,8 @@ const Services: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-[160px_1px_1fr] gap-8 lg:gap-8">
           {/* Left Column: Service Content */}
-          <div className="flex flex-col h-full justify-between">
-            <div className="mb-12">
+          <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col lg:h-full lg:justify-between">
+            <div className="col-span-1 lg:mb-12">
               <h3 className="text-lg tracking-widest mb-4 font-medium uppercase">一、服務內容</h3>
               <ul className="space-y-3">
                 {serviceContent.map((item, index) => (
@@ -64,18 +64,18 @@ const Services: React.FC = () => {
               </ul>
             </div>
 
-            <div className="mt-8">
+            <div className="col-span-1 flex flex-col justify-center lg:mt-8">
                <p className="text-xs tracking-widest mb-2 opacity-60">「凱初設計」室內設計APP</p>
                <img 
                  src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772714910/%E5%B0%8F%E5%B9%B3%E6%9D%BF-1_fmi7hi.png" 
                  alt="凱初設計 APP Interface 1" 
-                 className="w-1/2 lg:w-full h-auto mb-4"
+                 className="w-full h-auto mb-4"
                  referrerPolicy="no-referrer"
                />
                <img 
                  src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772708827/%E5%B0%8F%E5%B9%B3%E6%9D%BF_slzd8f.png" 
                  alt="凱初設計 APP Interface" 
-                 className="w-1/2 lg:w-full h-auto"
+                 className="w-full h-auto"
                  referrerPolicy="no-referrer"
                />
             </div>

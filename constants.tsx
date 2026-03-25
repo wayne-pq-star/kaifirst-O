@@ -22,7 +22,7 @@ export const HERO_IMAGES = [
   'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772713172/R2_uiuftg.jpg',
   'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772713177/R1_obydwt.jpg',
   'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772933916/14_bivqpr.jpg',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772934297/13_nvccxr.jpg',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1774417360/13_nvccxr.jpg',
 ];
 
 export const PROJECTS: Project[] = [
@@ -49,7 +49,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'things-stars-shift',
-    title: 'Things-stars shift•Time stops pass.\n物換星移•時光非逝',
+    title: 'Things-stars shift•Time stops pass\n物換星移•時光非逝',
     category: ProjectCategory.AWARDS,
     image: 'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772583830/8-S_cmbz4s.jpg',
     year: '2020',
