@@ -946,7 +946,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: 'AI 瞬間模擬：打破傳統設計的「想像斷層」',
     date: 'JAN 02, 2026',
     excerpt: '告別漫長等待，一鍵生成多變空間風格。',
-    image: 'https://img.youtube.com/vi/ckL2igUV_OQ/maxresdefault.jpg',
+    image: 'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1775545817/APP1-CV_z5yda2.jpg',
     video: 'https://www.youtube.com/embed/ckL2igUV_OQ',
     content: `傳統設計的痛點：過程長、溝通難 
 在傳統的室內設計流程中，從初步洽談到看見第一張 3D 效果圖，往往需要經歷數週的等待。設計師需耗費大量時間進行現場丈量、CAD 放樣與 3D 建模，最後再經過漫長的電腦渲染程序才能產出視覺提案。
@@ -962,7 +962,7 @@ KAIFIRST 凱初設計 為了優化客戶體驗，開發了「快速生圖 APP（
     title: 'AI深度風格轉化：將您的美學靈感「精準遷移」',
     date: 'JAN 08, 2026',
     excerpt: '精準提取靈感照片，量身訂製您的私人美學。',
-    image: 'https://img.youtube.com/vi/AFEvIVobDuw/maxresdefault.jpg',
+    image: 'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1775545817/APP1-CV2_yigjz5.jpg',
     video: 'https://www.youtube.com/embed/AFEvIVobDuw',
     content: `傳統設計的痛點：風格不符、修改緩慢 
 許多屋主在裝潢前會收藏心儀的範例照，但最困擾的是如何將這些「美感」完美移植到自己的格局中。傳統模式下，設計師很難僅憑幾張照片就百分之百捕捉到客戶心中的「氛圍感」，常導致最終提案與期待產生落差。

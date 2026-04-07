@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { Play } from 'lucide-react';
 import { BLOG_POSTS } from '../constants';
 import { BlogPost } from '../types';
 
 const Blog: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [isViewAllOpen, setIsViewAllOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const POSTS_PER_PAGE = 4;
 
   // Prevent scrolling when modal is open
   useEffect(() => {
-    if (selectedPost || isViewAllOpen) {
+    if (selectedPost || isViewAllOpen || selectedVideo) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
-  }, [selectedPost, isViewAllOpen]);
+  }, [selectedPost, isViewAllOpen, selectedVideo]);
 
   // Initial posts to show (first 2)
   const initialPosts = BLOG_POSTS.slice(0, 2);
@@ -48,24 +50,26 @@ const Blog: React.FC = () => {
               className="group cursor-pointer"
               onClick={() => setSelectedPost(post)}
             >
-              <div className="overflow-hidden aspect-[16/9] mb-4 bg-zinc-200 dark:bg-zinc-800">
-                {post.video ? (
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={post.video}
-                    title={post.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="w-full h-full object-cover"
-                  ></iframe>
-                ) : (
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-                  />
+              <div 
+                className="relative overflow-hidden aspect-[16/9] mb-4 bg-zinc-200 dark:bg-zinc-800"
+                onClick={(e) => {
+                  if (post.video) {
+                    e.stopPropagation();
+                    setSelectedVideo(post.video);
+                  }
+                }}
+              >
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                />
+                {post.video && (
+                  <div className="absolute inset-0 flex items-center justify-center transition-colors">
+                    <div className="w-12 h-12 rounded-full border border-white flex items-center justify-center bg-black/30 backdrop-blur-sm text-white">
+                      <Play size={20} className="ml-1" fill="currentColor" />
+                    </div>
+                  </div>
                 )}
               </div>
               <span className="text-[10px] opacity-40 tracking-[0.2em] block mb-2 uppercase">{post.date}</span>
@@ -116,24 +120,26 @@ const Blog: React.FC = () => {
                     className="group cursor-pointer"
                     onClick={() => setSelectedPost(post)}
                   >
-                    <div className="overflow-hidden aspect-[16/9] mb-4 bg-zinc-200 dark:bg-zinc-800">
-                      {post.video ? (
-                        <iframe
-                          width="100%"
-                          height="100%"
-                          src={post.video}
-                          title={post.title}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                          className="w-full h-full object-cover"
-                        ></iframe>
-                      ) : (
-                        <img
-                          src={post.image}
-                          alt={post.title}
-                          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-                        />
+                    <div 
+                      className="relative overflow-hidden aspect-[16/9] mb-4 bg-zinc-200 dark:bg-zinc-800"
+                      onClick={(e) => {
+                        if (post.video) {
+                          e.stopPropagation();
+                          setSelectedVideo(post.video);
+                        }
+                      }}
+                    >
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                      />
+                      {post.video && (
+                        <div className="absolute inset-0 flex items-center justify-center transition-colors">
+                          <div className="w-12 h-12 rounded-full border border-white flex items-center justify-center bg-black/30 backdrop-blur-sm text-white">
+                            <Play size={20} className="ml-1" fill="currentColor" />
+                          </div>
+                        </div>
                       )}
                     </div>
                     <span className="text-[10px] opacity-40 tracking-[0.2em] block mb-2 uppercase">{post.date}</span>
@@ -252,6 +258,42 @@ const Blog: React.FC = () => {
               >
                 BACK TO BLOG 返回文章列表
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Video Lightbox Modal */}
+      {selectedVideo && (
+        <div 
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-white/50 dark:bg-black/50 backdrop-blur-md animate-fade-in"
+          onClick={() => setSelectedVideo(null)}
+        >
+          <button 
+            className="absolute top-6 right-6 md:top-8 md:right-8 p-4 group flex items-center space-x-3 text-[10px] tracking-[0.4em] font-bold hover:opacity-50 transition-opacity uppercase text-black dark:text-white z-10"
+            onClick={() => setSelectedVideo(null)}
+          >
+            <span>CLOSE 關閉</span>
+            <div className="w-8 h-[1px] bg-black dark:bg-white relative">
+              <div className="absolute top-0 left-0 w-full h-full rotate-45 origin-center"></div>
+              <div className="absolute top-0 left-0 w-full h-full -rotate-45 origin-center"></div>
+            </div>
+          </button>
+          <div 
+            className="w-full max-w-5xl px-4 md:px-12" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-full aspect-video relative shadow-2xl bg-black">
+              <iframe
+                width="100%"
+                height="100%"
+                src={selectedVideo}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              ></iframe>
             </div>
           </div>
         </div>
