@@ -978,7 +978,7 @@ KAIFIRST 凱初設計 為了優化客戶體驗，開發了「快速生圖 APP（
     title: '全景視野不卡關：凱初設計 AI 技術，讓 720° 空間修改即刻完成',
     date: 'JAN 15, 2026',
     excerpt: '突破傳統全景修改瓶頸，隨心定義 360 度理想家。',
-    image: 'https://img.youtube.com/vi/87KipWLt0_U/maxresdefault.jpg',
+    image: 'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1775566311/APP1-CV3_bt7fyx.jpg',
     video: 'https://www.youtube.com/embed/87KipWLt0_U',
     content: `在室內設計的提案中，全景圖（Panorama）能提供最直觀的空間沉浸感，讓客戶如同身歷其境。然而，傳統的全景圖製作與修改流程，一直是設計師與屋主最頭痛的環節。
 傳統設計的痛點：全景圖修改緩慢且繁瑣
