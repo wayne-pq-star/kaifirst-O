@@ -1,0 +1,4 @@
+    User-agent: *
+    Allow: /
+
+    Sitemap: https://kaifirst-design.com/sitemap.xml
