@@ -33,10 +33,15 @@ const Contact: React.FC = () => {
               <div>
                 <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Social Media 社交媒體</h3>
                 <div className="flex space-x-6 pt-2">
-                  <a href="https://www.youtube.com/@TheWayneFang" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity"><Youtube size={20} strokeWidth={1.5} /></a>
-                  <a href="https://www.facebook.com/KaiFirstDesign/" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity"><Facebook size={20} strokeWidth={1.5} /></a>
-                  <a href="https://www.instagram.com/w6988215/" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity"><Instagram size={20} strokeWidth={1.5} /></a>
-                  <a href="https://www.threads.net/@w6988215" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity"><AtSign size={20} strokeWidth={1.5} /></a>
+                  <a href="https://www.youtube.com/@TheWayneFang" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 YouTube 頻道" className="opacity-75 hover:opacity-100 transition-opacity">
+    <Youtube size={20} strokeWidth={1.5} /></a>
+                  <a href="https://www.facebook.com/KaiFirstDesign/" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 Facebook 粉絲專頁" className="opacity-75 hover:opacity-100 transition-opacity">
+    <Facebook size={20} strokeWidth={1.5} />
+</a>
+                  <a href="https://www.instagram.com/kaifirst_design/" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 Instagram" className="opacity-75 hover:opacity-100 transition-opacity">
+    <Instagram size={20} strokeWidth={1.5} /></a>
+                  <a href="https://www.threads.net/@w6988215" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 Threads" className="opacity-75 hover:opacity-100 transition-opacity">
+    <AtSign size={20} strokeWidth={1.5} /></a>
                 </div>
               </div>
             </div>
@@ -59,20 +64,20 @@ const Contact: React.FC = () => {
         <form className="space-y-8 flex flex-col h-full" action="https://formspree.io/f/xvzwodyl" method="POST">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="border-b border-zinc-200 dark:border-zinc-800 pb-4">
-              <label className="text-[10px] tracking-[0.4em] opacity-40 block mb-2 uppercase">Full Name 您的姓名</label>
+              <label className="text-[10px] tracking-[0.4em] opacity-70 block mb-2 uppercase">Full Name 您的姓名</label>
               <input type="text" name="name" className="w-full bg-transparent outline-none text-sm font-light py-2" placeholder="Your Name" required />
             </div>
             <div className="border-b border-zinc-200 dark:border-zinc-800 pb-4">
-              <label className="text-[10px] tracking-[0.4em] opacity-40 block mb-2 uppercase">Email Address 您的電子郵件</label>
+              <label className="text-[10px] tracking-[0.4em] opacity-70 block mb-2 uppercase">Email Address 您的電子郵件</label>
               <input type="email" name="email" className="w-full bg-transparent outline-none text-sm font-light py-2" placeholder="name@email.com" required />
             </div>
           </div>
           <div className="border-b border-zinc-200 dark:border-zinc-800 pb-4">
-            <label className="text-[10px] tracking-[0.4em] opacity-40 block mb-2 uppercase">Subject 主題</label>
+            <label className="text-[10px] tracking-[0.4em] opacity-70 block mb-2 uppercase">Subject 主題</label>
             <input type="text" name="subject" className="w-full bg-transparent outline-none text-sm font-light py-2" placeholder="Inquiry about..." required />
           </div>
           <div className="border-b border-zinc-200 dark:border-zinc-800 pb-4 flex-grow">
-            <label className="text-[10px] tracking-[0.4em] opacity-40 block mb-2 uppercase">Message 訊息內容</label>
+            <label className="text-[10px] tracking-[0.4em] opacity-70 block mb-2 uppercase">Message 訊息內容</label>
             <textarea name="message" rows={4} className="w-full bg-transparent outline-none text-sm font-light py-2 resize-none h-full min-h-[120px]" placeholder="Tell us about your project" required></textarea>
           </div>
           <button type="submit" className="w-full bg-black dark:bg-white text-white dark:text-black py-6 text-[10px] tracking-[0.4em] font-bold hover:opacity-80 transition-opacity uppercase mt-auto">

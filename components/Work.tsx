@@ -98,7 +98,7 @@ const Work: React.FC = () => {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`text-[10px] tracking-[0.25em] transition-all pb-1 border-b ${
-                activeCategory === cat ? 'border-black dark:border-white opacity-100' : 'border-transparent opacity-40 hover:opacity-100'
+                activeCategory === cat ? 'border-black dark:border-white opacity-100' : 'border-transparent opacity-60 hover:opacity-100'
               }`}
             >
               {categoryLabels[cat] || cat}
