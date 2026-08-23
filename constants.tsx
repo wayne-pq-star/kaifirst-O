@@ -9,18 +9,18 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 export const HERO_IMAGES = [
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477558/13-1_10_uzfhqj.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477562/13-1_11_mg07rv.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477465/13-1_5_v8pfjd.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477903/13-1_13_ravkwz.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477491/13-1_8_di21ig.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477484/13-1_tb7w22.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477477/13-1_3_cpwca9.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477474/13-1_4_lok6ct.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477498/13-1_6_wylaog.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477494/13-1_7_pg56as.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477836/13-1_12_tu8wt2.webp',
-  'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1787477481/13-1_9_cbqnqh.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477558/13-1_10_uzfhqj.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477562/13-1_11_mg07rv.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477465/13-1_5_v8pfjd.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477903/13-1_13_ravkwz.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477491/13-1_8_di21ig.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477484/13-1_tb7w22.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477477/13-1_3_cpwca9.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477474/13-1_4_lok6ct.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477498/13-1_6_wylaog.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477494/13-1_7_pg56as.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477836/13-1_12_tu8wt2.webp',
+  'https://res.cloudinary.com/dihkqwd43/image/upload/v1787477481/13-1_9_cbqnqh.webp',
 ];
 
 // 放到你的 Hero 元件 return 裡面
