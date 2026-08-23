@@ -2,24 +2,32 @@
 <html lang="zh-Hant-TW">
 <head>
     <!-- Preconnect 連線加速優化 -->
-    <link rel="preconnect" href="https://connect.facebook.net">
-    <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com">
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code (智能非阻塞/閒置載入) -->
     <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1713570403046657');
-      fbq('track', 'PageView');
+      function initMetaPixel() {
+        if (window._fbPixelLoaded) return;
+        window._fbPixelLoaded = true;
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1713570403046657');
+        fbq('track', 'PageView');
+      }
+
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(initMetaPixel, { timeout: 2000 });
+      } else {
+        setTimeout(initMetaPixel, 2000);
+      }
     </script>
     <!-- End Meta Pixel Code -->
 
