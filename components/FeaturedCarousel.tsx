@@ -54,6 +54,12 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
                 src={thumbSrc} 
                 alt={`Thumbnail ${index + 1}`} 
                 className="w-full h-full object-cover"
+                loading={index < 8 ? "eager" : "lazy"}
+                // @ts-ignore
+                fetchPriority={index < 8 ? "high" : "low"}
+                decoding="async"
+                width={300}
+                height={200}
               />
             </div>
           );
@@ -77,6 +83,12 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
               src={img} 
               alt={`Featured ${index + 1}`} 
               className="w-full h-full object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
+              // @ts-ignore
+              fetchPriority={index === 0 ? "high" : "low"}
+              decoding="async"
+              width={960}
+              height={720}
             />
           </div>
         ))}
