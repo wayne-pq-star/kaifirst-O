@@ -44,9 +44,9 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ src, alt, index, aspectRati
         src={src} 
         alt={alt}
         className={`w-full h-auto ${lqipSrc ? `transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}` : ''}`}
-        loading={index < 2 ? "eager" : "lazy"}
+        loading={index === 0 ? "eager" : "lazy"}
         // @ts-ignore - React 19 supports fetchPriority but types might not be updated yet
-        fetchPriority={index < 2 ? "high" : "low"}
+        fetchPriority={index === 0 ? "high" : "low"}
         decoding="async"
         onLoad={() => setIsLoaded(true)}
       />
@@ -124,9 +124,9 @@ const Work: React.FC = () => {
                 src={project.image}
                 alt={project.title}
                 className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${project.customImageClass || ''}`}
-                loading={i < 2 ? "eager" : "lazy"}
+                loading={i === 0 ? "eager" : "lazy"}
                 // @ts-ignore
-                fetchPriority={i < 2 ? "high" : "low"}
+                fetchPriority={i === 0 ? "high" : "low"}
                 decoding="async"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
