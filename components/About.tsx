@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link2 } from 'lucide-react';
 
 const About: React.FC = () => {
   return (
@@ -64,9 +63,9 @@ const About: React.FC = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       aria-label="MUSE Design Awards 獲獎報導" 
-                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                      className="inline-flex items-center ml-1.5 opacity-60 hover:opacity-100 transition-opacity font-sans text-xs"
                     >
-                      <Link2 size={13} strokeWidth={2} />
+                      ↗
                     </a>
                   </p>
                   <p className="text-sm">A' Design Award</p>
@@ -80,9 +79,9 @@ const About: React.FC = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       aria-label="World Architecture Community 專案頁面" 
-                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                      className="inline-flex items-center ml-1.5 opacity-60 hover:opacity-100 transition-opacity font-sans text-xs"
                     >
-                      <Link2 size={13} strokeWidth={2} />
+                      ↗
                     </a>
                   </p>
                   <p className="text-sm flex items-center">
@@ -92,9 +91,9 @@ const About: React.FC = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       aria-label="IDA International Design Awards 獲獎報導" 
-                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                      className="inline-flex items-center ml-1.5 opacity-60 hover:opacity-100 transition-opacity font-sans text-xs"
                     >
-                      <Link2 size={13} strokeWidth={2} />
+                      ↗
                     </a>
                   </p>
                   <p className="text-sm flex items-center">
@@ -104,9 +103,9 @@ const About: React.FC = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       aria-label="LIV Hospitality Design Award 獲獎頁面" 
-                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                      className="inline-flex items-center ml-1.5 opacity-60 hover:opacity-100 transition-opacity font-sans text-xs"
                     >
-                      <Link2 size={13} strokeWidth={2} />
+                      ↗
                     </a>
                   </p>
                   <p className="text-xs opacity-60 mt-1">2021</p>
@@ -119,9 +118,9 @@ const About: React.FC = () => {
                       target="_blank" 
                       rel="noopener noreferrer" 
                       aria-label="晶鯤鵬優秀獎 頒獎典禮報導" 
-                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                      className="inline-flex items-center ml-1.5 opacity-60 hover:opacity-100 transition-opacity font-sans text-xs"
                     >
-                      <Link2 size={13} strokeWidth={2} />
+                      ↗
                     </a>
                   </p>
                   <p className="text-xs opacity-60 mt-1">2020</p>

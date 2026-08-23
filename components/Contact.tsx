@@ -32,33 +32,41 @@ const Contact: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Social Media 社交媒體</h3>
-                <div className="flex space-x-6 pt-2">
-                  <a href="https://www.youtube.com/@TheWayneFang" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 YouTube 頻道" className="opacity-75 hover:opacity-100 transition-opacity">
-    <Youtube size={20} strokeWidth={1.5} /></a>
-                  <a href="https://www.facebook.com/KaiFirstDesign/" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 Facebook 粉絲專頁" className="opacity-75 hover:opacity-100 transition-opacity">
-    <Facebook size={20} strokeWidth={1.5} />
-</a>
-                  <a href="https://www.instagram.com/kaifirst_design/" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 Instagram" className="opacity-75 hover:opacity-100 transition-opacity">
-    <Instagram size={20} strokeWidth={1.5} /></a>
-                  <a href="https://www.threads.net/@w6988215" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 Threads" className="opacity-75 hover:opacity-100 transition-opacity">
+                <div className="flex items-center space-x-6 pt-2">
+                  <a href="https://www.youtube.com/@TheWayneFang" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 YouTube 頻道" className="opacity-75 hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <Youtube size={20} strokeWidth={1.5} />
+                  </a>
+                  <a href="https://www.facebook.com/KaiFirstDesign/" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 Facebook 粉絲專頁" className="opacity-75 hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <Facebook size={20} strokeWidth={1.5} />
+                  </a>
+                  <a href="https://www.instagram.com/kaifirst_design/" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 Instagram" className="opacity-75 hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <Instagram size={20} strokeWidth={1.5} />
+                  </a>
+                  <a href="https://www.threads.net/@w6988215" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 Threads" className="opacity-75 hover:opacity-100 transition-opacity flex items-center justify-center">
                     <AtSign size={20} strokeWidth={1.5} />
                   </a>
-                  <a href="https://www.facebook.com/wayne.fang.7?locale=zh_TW" target="_blank" rel="noopener noreferrer" aria-label="設計師個人 Facebook" className="opacity-75 hover:opacity-100 transition-opacity flex items-center">
+                  <a href="https://www.facebook.com/wayne.fang.7?locale=zh_TW" target="_blank" rel="noopener noreferrer" aria-label="設計師個人 Facebook" className="opacity-75 hover:opacity-100 transition-opacity flex items-center justify-center">
                     <img 
-                      src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_80,h_80,c_fill/v1787454975/%E6%96%B0%E5%A2%9E%E5%B0%88%E6%A1%88_eby66f.png" 
+                      src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_48,h_48,c_fill/v1787454975/%E6%96%B0%E5%A2%9E%E5%B0%88%E6%A1%88_eby66f.png" 
                       alt="個人 Facebook" 
                       className="w-5 h-5 object-contain"
                       width="20"
                       height="20"
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
                     />
                   </a>
-                  <a href="https://www.instagram.com/kai_in_design/" target="_blank" rel="noopener noreferrer" aria-label="凱初設計作品 Instagram" className="opacity-75 hover:opacity-100 transition-opacity flex items-center">
+                  <a href="https://www.instagram.com/kai_in_design/" target="_blank" rel="noopener noreferrer" aria-label="凱初設計作品 Instagram" className="opacity-75 hover:opacity-100 transition-opacity flex items-center justify-center">
                     <img 
-                      src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_80,h_80,c_fill/v1787454975/%E6%96%B0%E5%A2%9E%E5%B0%88%E6%A1%88_1_nbepxc.png" 
+                      src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_48,h_48,c_fill/v1787454975/%E6%96%B0%E5%A2%9E%E5%B0%88%E6%A1%88_1_nbepxc.png" 
                       alt="作品 Instagram" 
                       className="w-5 h-5 object-contain"
                       width="20"
                       height="20"
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
                     />
                   </a>
                 </div>
