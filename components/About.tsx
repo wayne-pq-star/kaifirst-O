@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link2 } from 'lucide-react';
 
 const About: React.FC = () => {
   return (
@@ -56,27 +57,72 @@ const About: React.FC = () => {
               <h3 className="text-xl font-serif mb-4 uppercase tracking-wide text-zinc-800 dark:text-zinc-200">AWARDS</h3>
               <div className="space-y-4 text-zinc-600 dark:text-zinc-400">
                 <div className="border-l-2 border-zinc-300 pl-4">
-                  <p className="text-sm">
-                    <a href="https://design.museaward.com/winner-info.php?id=11166" target="_blank" rel="noopener noreferrer" className="hover:underline">MUSE Design Awards</a>
+                  <p className="text-sm flex items-center">
+                    <span>MUSE Design Awards</span>
+                    <a 
+                      href="https://design.museaward.com/winner-info.php?id=11166" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      aria-label="MUSE Design Awards 獲獎報導" 
+                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                    >
+                      <Link2 size={13} strokeWidth={2} />
+                    </a>
                   </p>
                   <p className="text-sm">A' Design Award</p>
                   <p className="text-xs opacity-60 mt-1">2022-2023</p>
                 </div>
                 <div className="border-l-2 border-zinc-300 pl-4">
-                  <p className="text-sm">
-                    <a href="https://worldarchitecture.org/architecture-projects/hvzhz/experience-cruise-project-pages.html?fbclid=IwAR0ddTtXvSR6_l3P8CzyxjDhyHS_DuWSWXXTpyD9WzPCi30BVTKssMYL_Jg" target="_blank" rel="noopener noreferrer" className="hover:underline">World Architecture Community</a>
+                  <p className="text-sm flex items-center">
+                    <span>World Architecture Community</span>
+                    <a 
+                      href="https://worldarchitecture.org/architecture-projects/hvzhz/experience-cruise-project-pages.html?fbclid=IwAR0ddTtXvSR6_l3P8CzyxjDhyHS_DuWSWXXTpyD9WzPCi30BVTKssMYL_Jg" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      aria-label="World Architecture Community 專案頁面" 
+                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                    >
+                      <Link2 size={13} strokeWidth={2} />
+                    </a>
                   </p>
-                  <p className="text-sm">
-                    <a href="https://www.idesignawards.com/winners/zoom.php?eid=9-34540-21&fbclid=IwAR2oinn_ma3oSPm9tOxG00VP9GIUhW_GnnDoLuGEouyybut08t2RCjZUXTk" target="_blank" rel="noopener noreferrer" className="hover:underline">IDA International Design Awards</a>
+                  <p className="text-sm flex items-center">
+                    <span>IDA International Design Awards</span>
+                    <a 
+                      href="https://www.idesignawards.com/winners/zoom.php?eid=9-34540-21&fbclid=IwAR2oinn_ma3oSPm9tOxG00VP9GIUhW_GnnDoLuGEouyybut08t2RCjZUXTk" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      aria-label="IDA International Design Awards 獲獎報導" 
+                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                    >
+                      <Link2 size={13} strokeWidth={2} />
+                    </a>
                   </p>
-                  <p className="text-sm">
-                    <a href="https://livawards.com/winner/liv/2021/557/0/" target="_blank" rel="noopener noreferrer" className="hover:underline">LIV Hospitality Design Award</a>
+                  <p className="text-sm flex items-center">
+                    <span>LIV Hospitality Design Award</span>
+                    <a 
+                      href="https://livawards.com/winner/liv/2021/557/0/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      aria-label="LIV Hospitality Design Award 獲獎頁面" 
+                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                    >
+                      <Link2 size={13} strokeWidth={2} />
+                    </a>
                   </p>
                   <p className="text-xs opacity-60 mt-1">2021</p>
                 </div>
                 <div className="border-l-2 border-zinc-300 pl-4">
-                  <p className="text-sm">
-                    <a href="https://today.line.me/tw/v3/article/D6Q7G5?fbclid=IwY2xjawQZqfBleHRuA2FlbQIxMABicmlkETFIT1M3Vm9NUUlsYkk3MmN1c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHjrz8K58YXRXCMclzEVAYuoW_PRaJSgNqAbC2XfIT6TRKPI0ypUAILmX8jlV_aem_oQplXWVEwutY3kz8jL8i2Q" target="_blank" rel="noopener noreferrer" className="hover:underline">工裝組 商業空間類 晶鯤鵬優秀獎</a>
+                  <p className="text-sm flex items-center">
+                    <span>工裝組 商業空間類 晶鯤鵬優秀獎</span>
+                    <a 
+                      href="https://today.line.me/tw/v3/article/D6Q7G5?fbclid=IwY2xjawQZqfBleHRuA2FlbQIxMABicmlkETFIT1M3Vm9NUUlsYkk3MmN1c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHjrz8K58YXRXCMclzEVAYuoW_PRaJSgNqAbC2XfIT6TRKPI0ypUAILmX8jlV_aem_oQplXWVEwutY3kz8jL8i2Q" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      aria-label="晶鯤鵬優秀獎 頒獎典禮報導" 
+                      className="inline-flex items-center ml-1.5 opacity-50 hover:opacity-100 transition-opacity"
+                    >
+                      <Link2 size={13} strokeWidth={2} />
+                    </a>
                   </p>
                   <p className="text-xs opacity-60 mt-1">2020</p>
                 </div>
