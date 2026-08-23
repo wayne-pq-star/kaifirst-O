@@ -25,18 +25,25 @@ export const HERO_IMAGES = [
   'https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1774417360/13_nvccxr.jpg',
 ];
 
-// 這段是放在你的 Hero 元件 return 裡面，不是放在陣列裡
-{HERO_IMAGES.map((img, i) => (
-  <img
-    key={i}
-    src={img}
-    loading={i < 2 ? "eager" : "lazy"}
-    width="960"
-    height="720"
-    decoding="async"
-    alt={`凱初設計作品 ${i+1}`}
-  />
-))}
+// 放到你的 Hero 元件 return 裡面
+export function Hero() {
+  return (
+    <>
+      {HERO_IMAGES.map((img, i) => (
+        <img
+          key={i}
+          src={img}
+          loading={i === 0 ? "eager" : "lazy"}
+          fetchPriority={i === 0 ? "high" : "low"}
+          decoding="async"
+          width="960"
+          height="720"
+          alt={`凱初設計作品 ${i+1}`}
+        />
+      ))}
+    </>
+  );
+}
 
 export const PROJECTS: Project[] = [
   {
