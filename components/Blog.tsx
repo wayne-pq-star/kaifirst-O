@@ -63,6 +63,11 @@ const Blog: React.FC = () => {
                   src={post.image}
                   alt={post.title}
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                  width={800}
+                  height={450}
+                  style={{ aspectRatio: '16/9' }}
+                  loading="lazy"
+                  decoding="async"
                 />
                 {post.video && (
                   <div className="absolute inset-0 flex items-center justify-center transition-colors">
@@ -133,6 +138,11 @@ const Blog: React.FC = () => {
                         src={post.image}
                         alt={post.title}
                         className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                        width={800}
+                        height={450}
+                        style={{ aspectRatio: '16/9' }}
+                        loading="lazy"
+                        decoding="async"
                       />
                       {post.video && (
                         <div className="absolute inset-0 flex items-center justify-center transition-colors">
@@ -230,6 +240,11 @@ const Blog: React.FC = () => {
                   src={selectedPost.image}
                   alt={selectedPost.title}
                   className="w-full h-full object-cover"
+                  width={1200}
+                  height={675}
+                  style={{ aspectRatio: '16/9' }}
+                  loading="lazy"
+                  decoding="async"
                 />
               )}
             </div>

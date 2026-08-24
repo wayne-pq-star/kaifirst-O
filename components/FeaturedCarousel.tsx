@@ -85,7 +85,7 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
               className="w-full h-full object-cover"
               width={960}
               height={720}
-              style={{ aspectRatio: '960 / 720' }}
+              style={{ aspectRatio: '960/720' }}
               loading={index === 0 ? "eager" : "lazy"}
               // @ts-ignore
               fetchPriority={index === 0 ? "high" : "low"}

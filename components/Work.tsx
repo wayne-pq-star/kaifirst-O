@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Project, ProjectCategory } from '../types';
 import { PROJECTS } from '../constants';
 
+function parseRatio(ratio?: string) {
+  if (!ratio) return { width: 1200, height: 800 };
+  const [w, h] = ratio.split('/').map(Number);
+  return { width: w || 1200, height: h || 800 };
+}
+
 interface GalleryImageProps {
   src: string;
   alt: string;
@@ -27,10 +33,12 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ src, alt, index, aspectRati
       }
   }
 
+  const dimensions = parseRatio(aspectRatio);
+
   return (
     <div 
       className="group overflow-hidden bg-zinc-100 dark:bg-zinc-900 relative w-full"
-      style={aspectRatio ? { aspectRatio } : {}}
+      style={aspectRatio ? { aspectRatio } : { aspectRatio: 'auto' }}
     >
       {lqipSrc && (
         <img
@@ -38,12 +46,19 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ src, alt, index, aspectRati
           alt=""
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden="true"
+          width={dimensions.width}
+          height={dimensions.height}
+          style={aspectRatio ? { aspectRatio } : { aspectRatio: 'auto' }}
+          decoding="async"
         />
       )}
       <img 
         src={src} 
         alt={alt}
         className={`w-full h-auto ${lqipSrc ? `transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}` : ''}`}
+        width={dimensions.width}
+        height={dimensions.height}
+        style={aspectRatio ? { aspectRatio } : { aspectRatio: 'auto' }}
         loading={index === 0 ? "eager" : "lazy"}
         // @ts-ignore - React 19 supports fetchPriority but types might not be updated yet
         fetchPriority={index === 0 ? "high" : "low"}
@@ -126,7 +141,7 @@ const Work: React.FC = () => {
                 className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${project.customImageClass || ''}`}
                 width={768}
                 height={576}
-                style={{ aspectRatio: '768 / 576' }}
+                style={{ aspectRatio: '768/576' }}
                 loading={i === 0 ? "eager" : "lazy"}
                 // @ts-ignore
                 fetchPriority={i === 0 ? "high" : "low"}

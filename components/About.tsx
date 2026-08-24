@@ -11,6 +11,11 @@ const About: React.FC = () => {
               src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772792060/7688_d6vxiw.png"
               alt="Portrait"
               className="w-full h-full object-cover"
+              width={768}
+              height={1024}
+              style={{ aspectRatio: '3/4' }}
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="w-full">
@@ -18,6 +23,10 @@ const About: React.FC = () => {
               src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772779989/GI_xfkjka.png"
               alt="Awards Logos"
               className="w-full h-auto object-contain"
+              width={800}
+              height={300}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>

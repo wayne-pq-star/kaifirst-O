@@ -70,12 +70,20 @@ const Services: React.FC = () => {
                  src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772714910/%E5%B0%8F%E5%B9%B3%E6%9D%BF-1_fmi7hi.png" 
                  alt="凱初設計 APP Interface 1" 
                  className="w-full h-auto mb-4"
+                 width={600}
+                 height={450}
+                 loading="lazy"
+                 decoding="async"
                  referrerPolicy="no-referrer"
                />
                <img 
                  src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772708827/%E5%B0%8F%E5%B9%B3%E6%9D%BF_slzd8f.png" 
                  alt="凱初設計 APP Interface" 
                  className="w-full h-auto"
+                 width={600}
+                 height={450}
+                 loading="lazy"
+                 decoding="async"
                  referrerPolicy="no-referrer"
                />
             </div>
