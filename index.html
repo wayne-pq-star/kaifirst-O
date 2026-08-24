@@ -51,6 +51,26 @@
         setTimeout(initGTag, 3000);
       }
     </script>
+
+    <!-- Microsoft clarity (智能非阻塞/閒置載入版) -->
+    <script>
+      function initClarity() {
+        if (window._clarityLoaded) return;
+        window._clarityLoaded = true;
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "y79p3cl90l");
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(initClarity, { timeout: 4000 });
+      } else {
+        setTimeout(initClarity, 4000);
+      }
+    </script>
+    <!-- End Microsoft clarity Code -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

@@ -59,7 +59,7 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
                 fetchPriority={index < 8 ? "high" : "low"}
                 decoding="async"
                 width={300}
-                height={200}
+                height={225}
               />
             </div>
           );

@@ -43,7 +43,7 @@ const About: React.FC = () => {
                   凱初設計以「實用、美感、情感與預算平衡」為核心，回應居住者的生活方式與情感需求，打造真正適合生活的空間。同時結合AI輔助設計，快速提供空間構想與3D視覺呈現，讓設計溝通更加清晰及高效。
                 </p>
                 <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-                  KAI First Design focuses on a balance of practicality, aesthetics, emotion, and budget, responding to the lifestyles and emotional needs of residents to create truly suitable living spaces. We also incorporates AI to provide spatial and 3D visual representations, making design clearer and more efficient.
+                  KAI First Design focuses on a balance of practicality, aesthetics and budget, responding to the lifestyles and emotional needs of residents to create suitable living spaces. We also incorporates AI to provide spatial and 3D visual representations, making design clearer and more efficient.
                 </p>
               </div>
             </div>

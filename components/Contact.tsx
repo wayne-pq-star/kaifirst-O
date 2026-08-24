@@ -8,7 +8,7 @@ const Contact: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
         <div className="flex flex-col h-full justify-between">
           <div>
-            <span className="text-[10px] tracking-[0.4em] opacity-40 block mb-2 uppercase">GET IN TOUCH 聯絡我們</span>
+            <span className="text-[10px] tracking-[0.4em] opacity-60 block mb-2 uppercase">GET IN TOUCH 聯絡我們</span>
             <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-12 uppercase">LET'S START A<br />CONVERSATION.<br />
             <span className="block mt-4 opacity-80">歡迎來訊諮詢</span>
             </h2>
@@ -17,21 +17,21 @@ const Contact: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-8 w-full">
             <div className="flex flex-col justify-between shrink-0">
               <div>
-                <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Office 辦公室</h3>
+                <h3 className="text-[10px] tracking-[0.4em] opacity-60 mb-4 uppercase">Office 辦公室</h3>
                 <p className="text-sm font-light tracking-widest leading-relaxed uppercase">
                   三重區中正北路15號5樓5-60<br />
                   新北市，台灣 TAIWAN
                 </p>
               </div>
               <div>
-                <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Contact 聯繫方式</h3>
+                <h3 className="text-[10px] tracking-[0.4em] opacity-60 mb-4 uppercase">Contact 聯繫方式</h3>
                 <p className="text-sm font-light tracking-widest">
                   service@kaifirst-design.com<br />
-                  0955305817
+                  0955305817 ▪️ 電話可加Line
                 </p>
               </div>
               <div>
-                <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Social Media 社交媒體</h3>
+                <h3 className="text-[10px] tracking-[0.4em] opacity-30 mb-4 uppercase">Social Media 社交媒體 (含個人)</h3>
                 <div className="flex items-center space-x-6 pt-2">
                   <a href="https://www.youtube.com/@TheWayneFang" target="_blank" rel="noopener noreferrer" aria-label="凱初設計 YouTube 頻道" className="opacity-75 hover:opacity-100 transition-opacity flex items-center justify-center">
                     <Youtube size={20} strokeWidth={1.5} />
@@ -91,23 +91,23 @@ const Contact: React.FC = () => {
         <form className="space-y-8 flex flex-col h-full" action="https://formspree.io/f/xvzwodyl" method="POST">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="border-b border-zinc-200 dark:border-zinc-800 pb-4">
-              <label className="text-[10px] tracking-[0.4em] opacity-80 block mb-2 uppercase">Full Name 您的姓名</label>
-              <input type="text" name="name" className="w-full bg-transparent outline-none text-sm font-light py-2" placeholder="Your Name" required />
+              <label className="text-[12px] tracking-[0.4em] opacity-85 block mb-2 uppercase">Full Name 您的姓名</label>
+              <input type="text" name="name" className="w-full bg-transparent outline-none text-sm font-light py-2" placeholder="輸入稱謂" required />
             </div>
             <div className="border-b border-zinc-200 dark:border-zinc-800 pb-4">
-              <label className="text-[10px] tracking-[0.4em] opacity-80 block mb-2 uppercase">Email Address 您的電子郵件</label>
-              <input type="email" name="email" className="w-full bg-transparent outline-none text-sm font-light py-2" placeholder="name@email.com" required />
+              <label className="text-[12px] tracking-[0.4em] opacity-85 block mb-2 uppercase">Email 您的電子郵件</label>
+              <input type="email" name="email" className="w-full bg-transparent outline-none text-sm font-light py-2" placeholder="輸入信箱" required />
             </div>
           </div>
           <div className="border-b border-zinc-200 dark:border-zinc-800 pb-4">
-            <label className="text-[10px] tracking-[0.4em] opacity-80 block mb-2 uppercase">Subject 主題</label>
-            <input type="text" name="subject" className="w-full bg-transparent outline-none text-sm font-light py-2" placeholder="Inquiry about..." required />
+            <label className="text-[12px] tracking-[0.4em] opacity-85 block mb-2 uppercase">Subject 主題</label>
+            <input type="text" name="subject" className="w-full bg-transparent outline-none text-sm font-light py-2" placeholder="輸入諮詢內容..." required />
           </div>
           <div className="border-b border-zinc-200 dark:border-zinc-800 pb-4 flex-grow">
-            <label className="text-[10px] tracking-[0.4em] opacity-80 block mb-2 uppercase">Message 訊息內容</label>
-            <textarea name="message" rows={4} className="w-full bg-transparent outline-none text-sm font-light py-2 resize-none h-full min-h-[120px]" placeholder="Tell us about your project" required></textarea>
+            <label className="text-[12px] tracking-[0.4em] opacity-85 block mb-2 uppercase">Message 訊息內容</label>
+            <textarea name="message" rows={4} className="w-full bg-transparent outline-none text-sm font-light py-2 resize-none h-full min-h-[120px]" placeholder="告訴凱初設計您的需求..." required></textarea>
           </div>
-          <button type="submit" className="w-full bg-black dark:bg-white text-white dark:text-black py-6 text-[10px] tracking-[0.4em] font-bold hover:opacity-80 transition-opacity uppercase mt-auto">
+          <button type="submit" className="w-full bg-black dark:bg-white text-white dark:text-black py-6 text-[14px] tracking-[0.4em] font-bold hover:opacity-80 transition-opacity uppercase mt-auto">
             SEND MESSAGE 送出訊息
           </button>
         </form>
