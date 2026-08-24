@@ -9,9 +9,14 @@ function parseRatio(ratio?: string) {
 }
 
 const getCloudinaryUrl = (url: string, transform: string) => {
-  if (!url.includes('cloudinary.com')) return url;
-  const baseUpload = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/');
-  return baseUpload.replace('/upload/', `/upload/${transform}/`);
+  if (!url || !url.includes('cloudinary.com')) return url;
+  if (/\/upload\/[^/]+\/v\d+\//.test(url)) {
+    return url.replace(/\/upload\/[^/]+\/(v\d+\/.*)/, `/upload/${transform}/$1`);
+  }
+  if (/\/upload\/v\d+\//.test(url)) {
+    return url.replace(/\/upload\/(v\d+\/.*)/, `/upload/${transform}/$1`);
+  }
+  return url.replace(/\/upload\/(.*)/, `/upload/${transform}/$1`);
 };
 
 interface GalleryImageProps {

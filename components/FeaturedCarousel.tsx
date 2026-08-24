@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 const getCloudinaryUrl = (url: string, transform: string) => {
-  if (!url.includes('cloudinary.com')) return url;
-  const baseUpload = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/');
-  return baseUpload.replace('/upload/', `/upload/${transform}/`);
+  if (!url || !url.includes('cloudinary.com')) return url;
+  if (/\/upload\/[^/]+\/v\d+\//.test(url)) {
+    return url.replace(/\/upload\/[^/]+\/(v\d+\/.*)/, `/upload/${transform}/$1`);
+  }
+  if (/\/upload\/v\d+\//.test(url)) {
+    return url.replace(/\/upload\/(v\d+\/.*)/, `/upload/${transform}/$1`);
+  }
+  return url.replace(/\/upload\/(.*)/, `/upload/${transform}/$1`);
 };
 
 interface FeaturedCarouselProps {
@@ -57,9 +62,9 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
                 src={thumbSrc} 
                 alt={`Thumbnail ${index + 1}`} 
                 className="w-full h-full object-cover"
-                loading={index < 8 ? "eager" : "lazy"}
+                loading={index < 2 ? "eager" : "lazy"}
                 // @ts-ignore
-                fetchPriority={index < 8 ? "high" : "low"}
+                fetchPriority={index === 0 ? "high" : "low"}
                 decoding="async"
                 width={300}
                 height={225}
