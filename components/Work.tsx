@@ -124,6 +124,9 @@ const Work: React.FC = () => {
                 src={project.image}
                 alt={project.title}
                 className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${project.customImageClass || ''}`}
+                width={768}
+                height={576}
+                style={{ aspectRatio: '768 / 576' }}
                 loading={i === 0 ? "eager" : "lazy"}
                 // @ts-ignore
                 fetchPriority={i === 0 ? "high" : "low"}
