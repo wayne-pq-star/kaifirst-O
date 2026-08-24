@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
+const getCloudinaryUrl = (url: string, transform: string) => {
+  if (!url.includes('cloudinary.com')) return url;
+  const baseUpload = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/');
+  return baseUpload.replace('/upload/', `/upload/${transform}/`);
+};
+
 interface FeaturedCarouselProps {
   images: string[];
 }
@@ -35,10 +41,7 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
         onMouseLeave={() => setIsPaused(false)}
       >
         {images.map((img, index) => {
-          // Inject w_300 for thumbnail optimization
-          const thumbSrc = img.includes('/upload/f_auto,q_auto/') 
-            ? img.replace('/upload/f_auto,q_auto/', '/upload/w_300,f_auto,q_auto/') 
-            : img.replace('/upload/', '/upload/w_300/');
+          const thumbSrc = getCloudinaryUrl(img, 'w_300,f_auto,q_auto');
 
           return (
             <div 
@@ -72,27 +75,34 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {images.map((img, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-              currentIndex === index ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
-          >
-            <img 
-              src={img} 
-              alt={`Featured ${index + 1}`} 
-              className="w-full h-full object-cover"
-              width={960}
-              height={720}
-              style={{ aspectRatio: '960/720' }}
-              loading={index === 0 ? "eager" : "lazy"}
-              // @ts-ignore
-              fetchPriority={index === 0 ? "high" : "low"}
-              decoding="async"
-            />
-          </div>
-        ))}
+        {images.map((img, index) => {
+          const src400 = getCloudinaryUrl(img, 'f_auto,q_auto,w_400');
+          const src960 = getCloudinaryUrl(img, 'f_auto,q_auto,w_960');
+
+          return (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                currentIndex === index ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              }`}
+            >
+              <img 
+                src={src960}
+                srcSet={`${src400} 400w, ${src960} 960w`}
+                sizes="(max-width: 768px) 400px, 960px"
+                alt={`Featured ${index + 1}`} 
+                className="w-full h-full object-cover"
+                width={960}
+                height={720}
+                style={{ aspectRatio: '960/720' }}
+                loading={index === 0 ? "eager" : "lazy"}
+                // @ts-ignore
+                fetchPriority={index === 0 ? "high" : "low"}
+                decoding="async"
+              />
+            </div>
+          );
+        })}
         
         {/* Progress Indicator (Optional) */}
         <div className="absolute bottom-4 right-4 z-20 flex gap-2">

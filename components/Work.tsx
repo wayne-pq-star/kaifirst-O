@@ -8,6 +8,12 @@ function parseRatio(ratio?: string) {
   return { width: w || 1200, height: h || 800 };
 }
 
+const getCloudinaryUrl = (url: string, transform: string) => {
+  if (!url.includes('cloudinary.com')) return url;
+  const baseUpload = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/');
+  return baseUpload.replace('/upload/', `/upload/${transform}/`);
+};
+
 interface GalleryImageProps {
   src: string;
   alt: string;
@@ -136,7 +142,9 @@ const Work: React.FC = () => {
             >
               <div className="relative overflow-hidden aspect-[4/3] mb-2 bg-zinc-100 dark:bg-zinc-900">
               <img
-                src={project.image}
+                src={getCloudinaryUrl(project.image, 'f_auto,q_auto,w_768')}
+                srcSet={`${getCloudinaryUrl(project.image, 'f_auto,q_auto,w_400')} 400w, ${getCloudinaryUrl(project.image, 'f_auto,q_auto,w_768')} 768w`}
+                sizes="(max-width: 768px) 400px, 768px"
                 alt={project.title}
                 className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${project.customImageClass || ''}`}
                 width={768}

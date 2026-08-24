@@ -17,6 +17,12 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
             src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772283159/LOGO-768-21-%E8%AA%BF%E6%95%B4_%E5%BE%AE%E8%AA%BF%E9%BB%9E_-2_r786nb.png" 
             alt="ARCH STUDIO" 
             className="h-12 w-auto object-contain" 
+            width={180}
+            height={48}
+            loading="eager"
+            // @ts-ignore
+            fetchPriority="high"
+            decoding="async"
             referrerPolicy="no-referrer"
           />
         </a>
