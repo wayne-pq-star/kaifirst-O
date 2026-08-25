@@ -24,8 +24,8 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
 
   // 首頁第一張 LCP 固定 URL
   const lcpImage = images[0];
-  const lcpSrcMobile = getCloudinaryUrl(lcpImage, 'f_auto,q_auto:low,w_300');
-  const lcpSrcDesktop = getCloudinaryUrl(lcpImage, 'f_auto,q_auto,w_960');
+  const lcpSrcMobile = getCloudinaryUrl(lcpImage, 'f_auto,q_auto:eco,w_600');
+  const lcpSrcDesktop = getCloudinaryUrl(lcpImage, 'f_auto,q_auto:eco,w_960');
 
   // 輪播延遲掛載，確保首幀零 JS 阻塞
   useEffect(() => {
@@ -134,17 +134,17 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
         >
           <img 
             src={lcpSrcMobile}
-            srcSet={`${lcpSrcMobile} 400w, ${lcpSrcDesktop} 960w`}
-            sizes="(max-width: 768px) 100vw, 60vw"
+            srcSet={`${lcpSrcMobile} 600w, ${lcpSrcDesktop} 960w`}
+            sizes="(max-width: 768px) 100vw, 50vw"
             alt="Featured 1" 
             className="w-full h-full object-cover"
             width={960}
-            height={720}
+            height={540}
             style={{ aspectRatio: '960/720' }}
             loading="eager"
             // @ts-ignore
             fetchPriority="high"
-            decoding="async"
+            decoding="sync"
           />
         </div>
 
