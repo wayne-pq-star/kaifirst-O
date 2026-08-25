@@ -1,42 +1,8 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Youtube, Facebook, Instagram, AtSign } from 'lucide-react';
 
 const Contact: React.FC = () => {
-  const [mapLoaded, setMapLoaded] = useState(false);
-  const mapContainerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const enableMap = () => setMapLoaded(true);
-
-    if ((window as any)._mapLoaded) {
-      enableMap();
-      return;
-    }
-
-    window.addEventListener('load-map', enableMap, { once: true });
-
-    // Also observe when user scrolls near the contact map
-    if (mapContainerRef.current) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            enableMap();
-            observer.disconnect();
-          }
-        },
-        { rootMargin: '200px' }
-      );
-      observer.observe(mapContainerRef.current);
-      return () => {
-        observer.disconnect();
-        window.removeEventListener('load-map', enableMap);
-      };
-    }
-
-    return () => window.removeEventListener('load-map', enableMap);
-  }, []);
-
   return (
     <section id="contact" className="pt-10 pb-10 px-6 md:px-12 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
@@ -107,26 +73,17 @@ const Contact: React.FC = () => {
               </div>
             </div>
             
-            <div 
-              ref={mapContainerRef}
-              className="w-full h-64 md:h-auto md:aspect-square bg-zinc-100 dark:bg-zinc-900 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
-            >
-              {mapLoaded ? (
-                <iframe 
-                  src="https://maps.google.com/maps?q=新北市三重區中正北路15號&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Google Map"
-                ></iframe>
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-xs opacity-40 font-light tracking-widest">
-                  MAP LOADING...
-                </div>
-              )}
+            <div className="w-full h-64 md:h-auto md:aspect-square bg-zinc-100 dark:bg-zinc-900 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+              <iframe 
+                src="https://maps.google.com/maps?q=新北市三重區中正北路15號&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Map"
+              ></iframe>
             </div>
           </div>
         </div>

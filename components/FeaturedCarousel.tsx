@@ -24,8 +24,8 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
 
   // 首頁第一張 LCP 固定 URL
   const lcpImage = images[0];
-  const lcpSrcMobile = `${getCloudinaryUrl(lcpImage, 'f_auto,q_auto:eco,w_600')}?v=117`;
-  const lcpSrcDesktop = `${getCloudinaryUrl(lcpImage, 'f_auto,q_auto:eco,w_960')}?v=117`;
+  const lcpSrcMobile = getCloudinaryUrl(lcpImage, 'f_auto,q_auto:low,w_300');
+  const lcpSrcDesktop = getCloudinaryUrl(lcpImage, 'f_auto,q_auto,w_960');
 
   // 輪播延遲掛載，確保首幀零 JS 阻塞
   useEffect(() => {
@@ -88,7 +88,7 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
         onMouseLeave={() => setIsPaused(false)}
       >
         {images.map((img, index) => {
-          const thumbSrc = `${getCloudinaryUrl(img, 'f_auto,q_auto:eco,w_300')}?v=117`;
+          const thumbSrc = getCloudinaryUrl(img, 'w_300,f_auto,q_auto');
 
           return (
             <div 
@@ -134,25 +134,25 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
         >
           <img 
             src={lcpSrcMobile}
-            srcSet={`${lcpSrcMobile} 600w, ${lcpSrcDesktop} 960w`}
-            sizes="(max-width: 768px) 100vw, 50vw"
+            srcSet={`${lcpSrcMobile} 400w, ${lcpSrcDesktop} 960w`}
+            sizes="(max-width: 768px) 100vw, 60vw"
             alt="Featured 1" 
             className="w-full h-full object-cover"
             width={960}
-            height={540}
+            height={720}
             style={{ aspectRatio: '960/720' }}
             loading="eager"
             // @ts-ignore
             fetchPriority="high"
-            decoding="sync"
+            decoding="async"
           />
         </div>
 
         {/* 第 2 張之後的主圖：僅在進入互動模式後動態掛載 */}
         {isInteractive && images.slice(1).map((img, sliceIdx) => {
           const index = sliceIdx + 1;
-          const srcMobile = `${getCloudinaryUrl(img, 'f_auto,q_auto:eco,w_400')}?v=117`;
-          const srcDesktop = `${getCloudinaryUrl(img, 'f_auto,q_auto:eco,w_600')}?v=117`;
+          const srcMobile = getCloudinaryUrl(img, 'f_auto,q_auto,w_400');
+          const srcDesktop = getCloudinaryUrl(img, 'f_auto,q_auto,w_960');
 
           return (
             <div
@@ -162,14 +162,14 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
               }`}
             >
               <img 
-                src={srcMobile}
-                srcSet={`${srcMobile} 400w, ${srcDesktop} 600w`}
-                sizes="(max-width: 768px) 45vw, 30vw"
+                src={srcDesktop}
+                srcSet={`${srcMobile} 400w, ${srcDesktop} 960w`}
+                sizes="(max-width: 768px) 100vw, 60vw"
                 alt={`Featured ${index + 1}`} 
                 className="w-full h-full object-cover"
-                width={400}
-                height={300}
-                style={{ aspectRatio: '4/3' }}
+                width={960}
+                height={720}
+                style={{ aspectRatio: '960/720' }}
                 loading="lazy"
                 // @ts-ignore
                 fetchPriority="low"
