@@ -12,7 +12,16 @@ import { NAV_ITEMS } from './constants';
 
 const App: React.FC = () => {
   useEffect(() => {
-    document.getElementById('lcp-skeleton')?.remove();
+    const removeSkeleton = () => {
+      document.getElementById('lcp-skeleton')?.remove();
+    };
+
+    if (document.readyState === 'complete') {
+      removeSkeleton();
+    } else {
+      window.addEventListener('load', removeSkeleton, { once: true });
+      return () => window.removeEventListener('load', removeSkeleton);
+    }
   }, []);
 
   return (

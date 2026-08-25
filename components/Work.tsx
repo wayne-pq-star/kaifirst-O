@@ -97,11 +97,10 @@ interface WorkCardProps {
 }
 
 const WorkCard: React.FC<WorkCardProps> = ({ project, index, isHiddenOnMobile, onSelect }) => {
-  const [isVisible, setIsVisible] = useState(index === 0);
+  const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (index === 0) return;
     if (!cardRef.current) return;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -116,7 +115,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ project, index, isHiddenOnMobile, o
     );
     observer.observe(cardRef.current);
     return () => observer.disconnect();
-  }, [index]);
+  }, []);
 
   return (
     <div 
@@ -127,17 +126,17 @@ const WorkCard: React.FC<WorkCardProps> = ({ project, index, isHiddenOnMobile, o
       <div className="relative overflow-hidden aspect-[4/3] mb-2 bg-zinc-100 dark:bg-zinc-900">
         {isVisible ? (
           <img
-            src={getCloudinaryUrl(project.image, 'f_auto,q_auto,w_768')}
+            src={getCloudinaryUrl(project.image, 'f_auto,q_auto,w_400')}
             srcSet={`${getCloudinaryUrl(project.image, 'f_auto,q_auto,w_400')} 400w, ${getCloudinaryUrl(project.image, 'f_auto,q_auto,w_768')} 768w`}
-            sizes="(max-width: 768px) 400px, 768px"
+            sizes="(max-width: 768px) 100vw, 30vw"
             alt={project.title}
             className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${project.customImageClass || ''}`}
             width={768}
             height={576}
             style={{ aspectRatio: '768/576' }}
-            loading={index === 0 ? "eager" : "lazy"}
+            loading="lazy"
             // @ts-ignore
-            fetchPriority={index === 0 ? "high" : "low"}
+            fetchPriority="low"
             decoding="async"
           />
         ) : (
