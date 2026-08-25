@@ -18,23 +18,41 @@ interface FeaturedCarouselProps {
 const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isInteractive, setIsInteractive] = useState(false);
   const [thumbnailsVisible, setThumbnailsVisible] = useState(false);
   const thumbnailsRef = useRef<HTMLDivElement | null>(null);
 
+  // 首頁第一張 LCP 固定 URL
+  const lcpImage = images[0];
+  const lcpSrcMobile = getCloudinaryUrl(lcpImage, 'f_auto,q_auto:low,w_300');
+  const lcpSrcDesktop = getCloudinaryUrl(lcpImage, 'f_auto,q_auto,w_960');
+
+  // 輪播延遲掛載，確保首幀零 JS 阻塞
   useEffect(() => {
-    const nextSlide = () => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
+    const activateInteractive = () => setIsInteractive(true);
+    if ('requestIdleCallback' in window) {
+      // @ts-ignore
+      const idleId = window.requestIdleCallback(activateInteractive, { timeout: 2500 });
+      // @ts-ignore
+      return () => window.cancelIdleCallback(idleId);
+    } else {
+      const timer = setTimeout(activateInteractive, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  // 輪播自動播放 (僅在進入互動模式後啟動)
+  useEffect(() => {
+    if (!isInteractive || isPaused || images.length <= 1) return;
 
     const timer = setInterval(() => {
-      if (!isPaused) {
-        nextSlide();
-      }
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 3000);
 
     return () => clearInterval(timer);
-  }, [isPaused, images.length]);
+  }, [isInteractive, isPaused, images.length]);
 
+  // 縮圖延遲監聽 (滾動或互動時加載)
   useEffect(() => {
     if (!thumbnailsRef.current) return;
     const observer = new IntersectionObserver(
@@ -53,16 +71,20 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
   }, []);
 
   const handleThumbnailClick = (index: number) => {
+    setIsInteractive(true);
     setCurrentIndex(index);
   };
 
   return (
-    <div className="w-full aspect-[2/1] flex bg-zinc-100 dark:bg-zinc-900">
+    <div 
+      className="w-full aspect-[2/1] flex bg-zinc-100 dark:bg-zinc-900"
+      style={{ contentVisibility: 'auto' }}
+    >
       {/* Left Column - Thumbnails */}
       <div 
         ref={thumbnailsRef}
         className="w-1/3 h-full overflow-y-auto grid grid-cols-2 content-start scrollbar-hide border-r border-white/10"
-        onMouseEnter={() => setIsPaused(true)}
+        onMouseEnter={() => { setIsInteractive(true); setIsPaused(true); }}
         onMouseLeave={() => setIsPaused(false)}
       >
         {images.map((img, index) => {
@@ -101,14 +123,35 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
       {/* Right Column - Main Image */}
       <div 
         className="w-2/3 h-full relative overflow-hidden"
-        onMouseEnter={() => setIsPaused(true)}
+        onMouseEnter={() => { setIsInteractive(true); setIsPaused(true); }}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {images.map((img, index) => {
-          const isLcp = index === 0;
-          const srcMobile = isLcp 
-            ? getCloudinaryUrl(img, 'f_auto,q_auto:low,w_300')
-            : getCloudinaryUrl(img, 'f_auto,q_auto,w_400');
+        {/* 首張圖：純 HTML 優先即時渲染 (保證 LCP 零延遲，絕不等待動態渲染或 JS) */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+            currentIndex === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'
+          }`}
+        >
+          <img 
+            src={lcpSrcMobile}
+            srcSet={`${lcpSrcMobile} 400w, ${lcpSrcDesktop} 960w`}
+            sizes="(max-width: 768px) 100vw, 60vw"
+            alt="Featured 1" 
+            className="w-full h-full object-cover"
+            width={960}
+            height={720}
+            style={{ aspectRatio: '960/720' }}
+            loading="eager"
+            // @ts-ignore
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
+
+        {/* 第 2 張之後的主圖：僅在進入互動模式後動態掛載 */}
+        {isInteractive && images.slice(1).map((img, sliceIdx) => {
+          const index = sliceIdx + 1;
+          const srcMobile = getCloudinaryUrl(img, 'f_auto,q_auto,w_400');
           const srcDesktop = getCloudinaryUrl(img, 'f_auto,q_auto,w_960');
 
           return (
@@ -119,7 +162,7 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
               }`}
             >
               <img 
-                src={isLcp ? srcMobile : srcDesktop}
+                src={srcDesktop}
                 srcSet={`${srcMobile} 400w, ${srcDesktop} 960w`}
                 sizes="(max-width: 768px) 100vw, 60vw"
                 alt={`Featured ${index + 1}`} 
@@ -127,16 +170,16 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
                 width={960}
                 height={720}
                 style={{ aspectRatio: '960/720' }}
-                loading={isLcp ? "eager" : "lazy"}
+                loading="lazy"
                 // @ts-ignore
-                fetchPriority={isLcp ? "high" : "low"}
+                fetchPriority="low"
                 decoding="async"
               />
             </div>
           );
         })}
         
-        {/* Progress Indicator (Optional) */}
+        {/* Progress Indicator */}
         <div className="absolute bottom-4 right-4 z-20 flex gap-2">
           {images.map((_, index) => (
             <div 
