@@ -11,6 +11,10 @@ import Footer from './components/Footer';
 import { NAV_ITEMS } from './constants';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    document.getElementById('lcp-skeleton')?.remove();
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Navbar

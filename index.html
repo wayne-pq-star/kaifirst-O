@@ -11,70 +11,62 @@
     <!-- 電腦 LCP 預載 w_960 版，只有電腦下載 -->
     <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp" media="(min-width: 769px)" fetchpriority="high">
 
-    <!-- Meta Pixel Code (智能非阻塞/閒置載入) -->
+    <!-- 追蹤腳本：使用者首次互動 (點擊/滾動/觸控) 或 閒置 (requestIdleCallback) 後才載入，徹底釋放主執行緒 TBT -->
     <script>
-      function initMetaPixel() {
-        if (window._fbPixelLoaded) return;
-        window._fbPixelLoaded = true;
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1713570403046657');
-        fbq('track', 'PageView');
-      }
+      (function() {
+        var loaded = false;
+        function loadTrackingScripts() {
+          if (loaded) return;
+          loaded = true;
 
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(initMetaPixel, { timeout: 2000 });
-      } else {
-        setTimeout(initMetaPixel, 2000);
-      }
-    </script>
-    <!-- End Meta Pixel Code -->
+          // 移除互動監聽器
+          ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'].forEach(function(e) {
+            window.removeEventListener(e, loadTrackingScripts, { passive: true });
+          });
 
-    <!-- Google tag (gtag.js) -->
-    <script>
-      function initGTag() {
-        if (window._gtagLoaded) return;
-        window._gtagLoaded = true;
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-LMRD49DLB8';
-        document.head.appendChild(s);
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-LMRD49DLB8');
-      }
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(initGTag, { timeout: 3000 });
-      } else {
-        setTimeout(initGTag, 3000);
-      }
-    </script>
+          // 1. Meta Pixel
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1713570403046657');
+          fbq('track', 'PageView');
 
-    <!-- Microsoft clarity (智能非阻塞/閒置載入版) -->
-    <script>
-      function initClarity() {
-        if (window._clarityLoaded) return;
-        window._clarityLoaded = true;
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "y79p3cl90l");
-      }
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(initClarity, { timeout: 4000 });
-      } else {
-        setTimeout(initClarity, 4000);
-      }
+          // 2. Google Tag (gtag.js)
+          var gtagScript = document.createElement('script');
+          gtagScript.async = true;
+          gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-LMRD49DLB8';
+          document.head.appendChild(gtagScript);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-LMRD49DLB8');
+
+          // 3. Microsoft Clarity
+          (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "y79p3cl90l");
+        }
+
+        // 綁定首次使用者互動
+        ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'].forEach(function(e) {
+          window.addEventListener(e, loadTrackingScripts, { passive: true, once: true });
+        });
+
+        // 備用閒置觸發：等 LCP 與 React 完整畫完後再載入
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadTrackingScripts, { timeout: 4000 });
+        } else {
+          setTimeout(loadTrackingScripts, 3500);
+        }
+      })();
     </script>
-    <!-- End Microsoft clarity Code -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -147,13 +139,14 @@
     </noscript>
     <div id="root">
       <!-- 原生 HTML 首圖骨架 (在 React 載入前立即顯示，消除白屏與 LCP 延遲) -->
-      <div id="initial-hero-skeleton" style="max-width: 80rem; margin: 0 auto; padding: 6rem 1.5rem 1.25rem 1.5rem; width: 100%;">
+      <div id="lcp-skeleton" style="max-width: 80rem; margin: 0 auto; padding: 6rem 1.5rem 1.25rem 1.5rem; width: 100%;">
         <div style="width: 100%; aspect-ratio: 2/1; display: flex; background-color: #f4f4f5; overflow: hidden; position: relative;">
           <!-- 佔位左欄 (與 Carousel 一致) -->
           <div style="width: 33.333333%; height: 100%; background-color: #e4e4e7; border-right: 1px solid rgba(0,0,0,0.05);"></div>
           <!-- 右側主圖：原生最速即時渲染 -->
           <div style="width: 66.666667%; height: 100%; position: relative;">
             <img
+              id="lcp-skeleton-img"
               src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:low,w_300/v1787578632/28_zycfiw.webp"
               srcset="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:low,w_300/v1787578632/28_zycfiw.webp 400w, https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp 960w"
               sizes="(max-width: 768px) 100vw, 60vw"
