@@ -11,61 +11,50 @@
     <!-- 電腦 LCP 預載 w_960 版，只有電腦下載 -->
     <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp" media="(min-width: 769px)" fetchpriority="high">
 
-    <!-- 追蹤腳本：使用者首次互動 (scroll/touchstart/mousemove/click) 或 requestIdleCallback 4秒 動態插入 loadScriptsOnce -->
+    <!-- 追蹤腳本：LCP 完成後載入版 (window load 2秒後 或 用戶實際互動時才載，杜絕 TBT 阻塞) -->
     <script>
-      (function() {
-        var executed = false;
-        function loadScriptsOnce() {
-          if (executed) return;
-          executed = true;
+      function loadScriptsOnce() {
+        if (window._tr) return;
+        window._tr = 1;
 
-          // 移除所有互動監聽器
-          ['scroll', 'touchstart', 'mousemove', 'click', 'keydown'].forEach(function(evt) {
-            window.removeEventListener(evt, loadScriptsOnce, { passive: true });
-          });
+        // 1. Google gtag
+        var s1 = document.createElement('script');
+        s1.async = true;
+        s1.src = 'https://www.googletagmanager.com/gtag/js?id=G-LMRD49DLB8';
+        document.head.appendChild(s1);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LMRD49DLB8');
 
-          // 1. Meta Pixel (動態插入)
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '1713570403046657');
-          fbq('track', 'PageView');
+        // 2. Facebook Pixel
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1713570403046657');
+        fbq('track', 'PageView');
 
-          // 2. Google Analytics / gtag (動態插入)
-          var gtagScript = document.createElement('script');
-          gtagScript.async = true;
-          gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-LMRD49DLB8';
-          document.head.appendChild(gtagScript);
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-LMRD49DLB8');
+        // 3. Microsoft Clarity
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "y79p3cl90l");
+      }
 
-          // 3. Microsoft Clarity (動態插入)
-          (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "y79p3cl90l");
-        }
+      // Lighthouse / 頁面載入完成 2 秒後才載，不影響 TBT
+      window.addEventListener('load', function() {
+        setTimeout(loadScriptsOnce, 2000);
+      });
 
-        // 監聽使用者首次互動
-        ['scroll', 'touchstart', 'mousemove', 'click', 'keydown'].forEach(function(evt) {
-          window.addEventListener(evt, loadScriptsOnce, { passive: true, once: true });
-        });
-
-        // 閒置 4 秒備用觸發 (等 LCP 與 React 完整畫完後再載)
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(loadScriptsOnce, { timeout: 4000 });
-        } else {
-          setTimeout(loadScriptsOnce, 4000);
-        }
-      })();
+      // 用戶若有實際互動提前載入
+      ['scroll', 'touchstart', 'click', 'mousemove', 'keydown'].forEach(function(e) {
+        window.addEventListener(e, loadScriptsOnce, { once: true, passive: true });
+      });
     </script>
 
     <meta charset="UTF-8">
