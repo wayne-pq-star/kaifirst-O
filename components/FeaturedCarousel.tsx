@@ -46,7 +46,7 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
           }
         });
       },
-      { rootMargin: '100px' }
+      { rootMargin: '200px' }
     );
     observer.observe(thumbnailsRef.current);
     return () => observer.disconnect();
@@ -106,7 +106,6 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
       >
         {images.map((img, index) => {
           const isLcp = index === 0;
-          // LCP image uses w_300,q_auto:low for mobile (or w_400,f_auto,q_auto:low)
           const srcMobile = isLcp 
             ? getCloudinaryUrl(img, 'f_auto,q_auto:low,w_300')
             : getCloudinaryUrl(img, 'f_auto,q_auto,w_400');
@@ -120,9 +119,9 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
               }`}
             >
               <img 
-                src={srcDesktop}
-                srcSet={`${srcMobile} 300w, ${srcDesktop} 960w`}
-                sizes="(max-width: 768px) 300px, 960px"
+                src={isLcp ? srcMobile : srcDesktop}
+                srcSet={`${srcMobile} 400w, ${srcDesktop} 960w`}
+                sizes="(max-width: 768px) 100vw, 60vw"
                 alt={`Featured ${index + 1}`} 
                 className="w-full h-full object-cover"
                 width={960}
@@ -131,7 +130,7 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
                 loading={isLcp ? "eager" : "lazy"}
                 // @ts-ignore
                 fetchPriority={isLcp ? "high" : "low"}
-                decoding="async"
+                decoding={isLcp ? "sync" : "async"}
               />
             </div>
           );
