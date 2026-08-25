@@ -703,16 +703,16 @@ export const PROJECTS: Project[] = [
     firstImageRatio: '1200/670',
     secondImageRatio: '1200/670',
     gallery: [
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787579985/67_kbe0ix.webp',
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787579980/74_zibcw0.webp',
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787579982/72_urmdmj.webp',
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787579987/71_yfg5ac.webp',
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787579973/69_m1n5lv.webp',
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787579977/75_mjwbhf.webp',
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787574524/51_g4nbcl.webp',
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787579990/61_fuhtxs.webp',
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787579971/62_osrrtj.webp',
-      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787579975/70_uvf5go.webp'
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656377/86_bsxq1t.webp',
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656377/81_nqdi2k.webp',
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656380/82_usu5zi.webp',
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656377/83_staq8e.webp',
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656377/85_aiwljx.webp',
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656380/90_wyp0r5.webp',
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656377/88_ujq9zx.webp',
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656377/87_uypniu.webp',
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656377/86_1_t1unco.webp',
+      'https://res.cloudinary.com/dihkqwd43/image/upload/v1787656377/84_cfcogj.webp'
     ]
   },
   {
