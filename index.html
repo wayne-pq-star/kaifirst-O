@@ -6,8 +6,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com">
 
-    <!-- LCP 首圖極速預載 (Preload with responsive srcset) -->
-    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp" imagesrcset="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:low,w_300/v1787578632/28_zycfiw.webp 400w, https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp 960w" imagesizes="(max-width: 768px) 100vw, 60vw" fetchpriority="high">
+    <!-- 手機 LCP 預載 w_300 low 版，只有手機下載 -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:low,w_300/v1787578632/28_zycfiw.webp" media="(max-width: 768px)" fetchpriority="high">
+    <!-- 電腦 LCP 預載 w_960 版，只有電腦下載 -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp" media="(min-width: 769px)" fetchpriority="high">
 
     <!-- Meta Pixel Code (智能非阻塞/閒置載入) -->
     <script>
@@ -137,7 +139,7 @@
     <script type="importmap">
     { "imports": { "react-dom/": "https://esm.sh/react-dom@^19.2.4/", "react/": "https://esm.sh/react@^19.2.4/", "react": "https://esm.sh/react@^19.2.4" } }
     </script>
-  <script type="module" crossorigin src="./assets/index-3ncb479P.js"></script>
+  <script type="module" crossorigin src="./assets/index-Bnvjq-nY.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-BbOy0z-Z.css">
 </head>
 <body class="bg-white text-black transition-colors duration-300">
