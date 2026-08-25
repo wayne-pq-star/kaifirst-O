@@ -6,8 +6,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com">
 
-    <!-- LCP 首圖極速預載 (Preload with responsive srcset) -->
-    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp" imagesrcset="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:low,w_300/v1787578632/28_zycfiw.webp 400w, https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp 960w" imagesizes="(max-width: 768px) 100vw, 60vw" fetchpriority="high">
+    <!-- 手機 LCP 預載 w_300 low 版，只有手機下載 -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:low,w_300/v1787578632/28_zycfiw.webp" media="(max-width: 768px)" fetchpriority="high">
+    <!-- 電腦 LCP 預載 w_960 版，只有電腦下載 -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp" media="(min-width: 769px)" fetchpriority="high">
 
     <!-- Meta Pixel Code (智能非阻塞/閒置載入) -->
     <script>

@@ -130,7 +130,7 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
                 loading={isLcp ? "eager" : "lazy"}
                 // @ts-ignore
                 fetchPriority={isLcp ? "high" : "low"}
-                decoding={isLcp ? "sync" : "async"}
+                decoding="async"
               />
             </div>
           );
