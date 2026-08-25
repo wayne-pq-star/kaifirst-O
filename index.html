@@ -1,46 +1,72 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-    <!-- Preconnect -->
+    <!-- Preconnect 連線加速優化 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com">
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://connect.facebook.net">
 
-    <!-- LCP 單一預載 - v119 滿分關鍵，手機電腦共用w_600 eco -->
-    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_600/v1787578632/28_zycfiw.webp?v=119" fetchpriority="high">
+    <!-- 手機 LCP 預載 w_300 low 版，只有手機下載 -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:low,w_300/v1787578632/28_zycfiw.webp" media="(max-width: 768px)" fetchpriority="high">
+    <!-- 電腦 LCP 預載 w_960 版，只有電腦下載 -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp" media="(min-width: 769px)" fetchpriority="high">
 
-    <!-- 追蹤 + 地圖：全部延遲，TBT 40/160ms 關鍵 -->
+    <!-- 追蹤腳本：LCP 完成後載入版 (window load 2秒後 或 用戶實際互動時才載，杜絕 TBT 阻塞) -->
     <script>
-      window._tr=0;
-      function loadScriptsOnce(){
-        if(window._tr) return; window._tr=1;
-        window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);}
-        // 1. GA4
-        var s1=document.createElement('script'); s1.async=true; s1.src='https://www.googletagmanager.com/gtag/js?id=G-LMRD49DLB8'; document.head.appendChild(s1);
-        gtag('js', new Date()); gtag('config','G-LMRD49DLB8');
-        // 2. Facebook
-       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init','1713570403046657'); fbq('track','PageView');
-        // 3. Clarity
-        (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","y79p3cl90l");
+      function loadScriptsOnce() {
+        if (window._tr) return;
+        window._tr = 1;
+
+        // 1. Google gtag
+        var s1 = document.createElement('script');
+        s1.async = true;
+        s1.src = 'https://www.googletagmanager.com/gtag/js?id=G-LMRD49DLB8';
+        document.head.appendChild(s1);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LMRD49DLB8');
+
+        // 2. Facebook Pixel
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1713570403046657');
+        fbq('track', 'PageView');
+
+        // 3. Microsoft Clarity
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "y79p3cl90l");
       }
-      function loadMapOnce(){
-        if(window._mapLoaded) return; window._mapLoaded=1;
-        window.dispatchEvent(new Event('load-map'));
-      }
-      window.addEventListener('load', function(){ setTimeout(loadScriptsOnce, 2000); setTimeout(loadMapOnce, 2500); });
-      ['scroll','touchstart','click','mousemove','keydown'].forEach(function(e){ window.addEventListener(e, loadScriptsOnce, {once:true, passive:true}); });
+
+      // Lighthouse / 頁面載入完成 2 秒後才載，不影響 TBT
+      window.addEventListener('load', function() {
+        setTimeout(loadScriptsOnce, 2000);
+      });
+
+      // 用戶若有實際互動提前載入
+      ['scroll', 'touchstart', 'click', 'mousemove', 'keydown'].forEach(function(e) {
+        window.addEventListener(e, loadScriptsOnce, { once: true, passive: true });
+      });
     </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>凱初設計 KAI First Design | 室內設計・老屋翻新・AI輔助設計</title>
     <link rel="canonical" href="https://kaifirst-design.com/" />
     <meta name="description" content="凱初設計提供專業室內設計、老屋翻新、預售屋客變及商業空間設計服務。結合AI輔助設計技術，快速生成3D效果圖，當天溝通當天看圖，為您打造理想的居住空間。">
     <meta name="keywords" content="室內設計, 凱初設計, 老屋翻新, 預售屋客變, 台北室內設計, 新北室內設計, 桃園室內設計, AI設計, 空間規劃">
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto/v1772969203/LOGO_dfptsq.png">
+
+    <!-- OG / 社群分享 -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kaifirst-design.com/">
     <meta property="og:site_name" content="凱初設計">
@@ -52,6 +78,7 @@
     <meta property="og:locale" content="zh_TW">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://res.cloudinary.com/dihkqwd43/image/upload/v1772953027/OG_caezmr.jpg">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -63,35 +90,62 @@
       "telephone": "+886-955-305-817",
       "priceRange": "$$",
       "description": "凱初設計提供專業室內設計、老屋翻新、新成屋、客變及商業空間設計服務。",
-      "address": {"@type": "PostalAddress","streetAddress": "三重區中正北路15號5樓5-60","addressLocality": "新北市","addressRegion": "新北市","postalCode": "241","addressCountry": "TW"},
-      "areaServed": [{"@type": "City","name": "台北市"},{"@type": "City","name": "新北市"},{"@type": "City","name": "桃園市"}],
-      "geo": {"@type": "GeoCoordinates","latitude": "25.061547","longitude": "121.492766"}
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "三重區中正北路15號5樓5-60",
+        "addressLocality": "新北市",
+        "addressRegion": "新北市",
+        "postalCode": "241",
+        "addressCountry": "TW"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "台北市" },
+        { "@type": "City", "name": "新北市" },
+        { "@type": "City", "name": "桃園市" }
+      ],
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "25.061547",
+        "longitude": "121.492766"
+      }
     }
     </script>
+
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&display=swap"></noscript>
-    <script type="importmap">{ "imports": { "react-dom/": "https://esm.sh/react-dom@^19.2.4/", "react/": "https://esm.sh/react@^19.2.4/", "react": "https://esm.sh/react@^19.2.4" } }</script>
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&display=swap">
+    </noscript>
+    <script type="importmap">
+    { "imports": { "react-dom/": "https://esm.sh/react-dom@^19.2.4/", "react/": "https://esm.sh/react@^19.2.4/", "react": "https://esm.sh/react@^19.2.4" } }
+    </script>
 </head>
 <body class="bg-white text-black transition-colors duration-300">
-    <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1713570403046657&ev=PageView&noscript=1" /></noscript>
+    <!-- Meta Pixel noscript fallback -->
+    <noscript>
+      <img height="1" width="1" style="display:none" alt=""
+      src="https://www.facebook.com/tr?id=1713570403046657&ev=PageView&noscript=1" />
+    </noscript>
     <div id="root">
+      <!-- 原生 HTML 首圖骨架 (在 React 載入前立即顯示，消除白屏與 LCP 延遲) -->
       <div id="lcp-skeleton" style="max-width: 80rem; margin: 0 auto; padding: 6rem 1.5rem 1.25rem 1.5rem; width: 100%;">
         <div style="width: 100%; aspect-ratio: 2/1; display: flex; background-color: #f4f4f5; overflow: hidden; position: relative;">
+          <!-- 佔位左欄 (與 Carousel 一致) -->
           <div style="width: 33.333333%; height: 100%; background-color: #e4e4e7; border-right: 1px solid rgba(0,0,0,0.05);"></div>
+          <!-- 右側主圖：原生最速即時渲染 -->
           <div style="width: 66.666667%; height: 100%; position: relative;">
             <img
               id="lcp-skeleton-img"
-              src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_600/v1787578632/28_zycfiw.webp?v=119"
-              srcset="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_600/v1787578632/28_zycfiw.webp?v=119 600w, https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp?v=119 960w"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:low,w_300/v1787578632/28_zycfiw.webp"
+              srcset="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:low,w_300/v1787578632/28_zycfiw.webp 400w, https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp 960w"
+              sizes="(max-width: 768px) 100vw, 60vw"
               alt="Featured 1"
               loading="eager"
               fetchpriority="high"
               decoding="sync"
-              style="width: 100%; height: 100%; object-fit: cover;"
+              style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 960/720;"
               width="960"
-              height="540"
+              height="720"
             />
           </div>
         </div>
