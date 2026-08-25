@@ -126,13 +126,13 @@ const WorkCard: React.FC<WorkCardProps> = ({ project, index, isHiddenOnMobile, o
       <div className="relative overflow-hidden aspect-[4/3] mb-2 bg-zinc-100 dark:bg-zinc-900">
         {isVisible ? (
           <img
-            src={getCloudinaryUrl(project.image, 'f_auto,q_auto:eco,w_400')}
-            srcSet={`${getCloudinaryUrl(project.image, 'f_auto,q_auto:eco,w_400')} 400w, ${getCloudinaryUrl(project.image, 'f_auto,q_auto:eco,w_600')} 600w`}
-            sizes="(max-width: 768px) 100vw, 30vw"
+            src={`${getCloudinaryUrl(project.image, 'f_auto,q_auto:eco,w_400')}?v=117`}
+            srcSet={`${getCloudinaryUrl(project.image, 'f_auto,q_auto:eco,w_400')}?v=117 400w, ${getCloudinaryUrl(project.image, 'f_auto,q_auto:eco,w_600')}?v=117 600w`}
+            sizes="(max-width: 768px) 45vw, 30vw"
             alt={project.title}
             className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${project.customImageClass || ''}`}
-            width={600}
-            height={450}
+            width={400}
+            height={300}
             style={{ aspectRatio: '4/3' }}
             loading="lazy"
             // @ts-ignore
