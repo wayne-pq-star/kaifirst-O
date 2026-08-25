@@ -1,6 +1,13 @@
 
 import React from 'react';
 
+const getCloudinarySrcSet = (url: string) => {
+  if (!url || !url.includes('cloudinary.com')) return undefined;
+  const mobile = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/f_auto,q_auto,w_400/');
+  const desktop = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/f_auto,q_auto,w_800/');
+  return `${mobile} 400w, ${desktop} 800w`;
+};
+
 const Services: React.FC = () => {
   const serviceContent = [
     '1. 住宅空間設計',
@@ -67,7 +74,9 @@ const Services: React.FC = () => {
             <div className="col-span-1 flex flex-col justify-center lg:mt-8">
                <p className="text-xs tracking-widest mb-2 opacity-60">「凱初設計」室內設計APP</p>
                <img 
-                 src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772714910/%E5%B0%8F%E5%B9%B3%E6%9D%BF-1_fmi7hi.png" 
+                 src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_800/v1772714910/%E5%B0%8F%E5%B9%B3%E6%9D%BF-1_fmi7hi.png" 
+                 srcSet={getCloudinarySrcSet('https://res.cloudinary.com/dihkqwd43/image/upload/v1772714910/%E5%B0%8F%E5%B9%B3%E6%9D%BF-1_fmi7hi.png')}
+                 sizes="(max-width: 768px) 400px, 800px"
                  alt="凱初設計 APP Interface 1" 
                  className="w-full h-auto mb-4"
                  width={600}
@@ -77,7 +86,9 @@ const Services: React.FC = () => {
                  referrerPolicy="no-referrer"
                />
                <img 
-                 src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772708827/%E5%B0%8F%E5%B9%B3%E6%9D%BF_slzd8f.png" 
+                 src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_800/v1772708827/%E5%B0%8F%E5%B9%B3%E6%9D%BF_slzd8f.png" 
+                 srcSet={getCloudinarySrcSet('https://res.cloudinary.com/dihkqwd43/image/upload/v1772708827/%E5%B0%8F%E5%B9%B3%E6%9D%BF_slzd8f.png')}
+                 sizes="(max-width: 768px) 400px, 800px"
                  alt="凱初設計 APP Interface" 
                  className="w-full h-auto"
                  width={600}

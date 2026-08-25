@@ -3,6 +3,13 @@ import { Play } from 'lucide-react';
 import { BLOG_POSTS } from '../constants';
 import { BlogPost } from '../types';
 
+const getCloudinarySrcSet = (url: string) => {
+  if (!url || !url.includes('cloudinary.com')) return undefined;
+  const mobile = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/f_auto,q_auto,w_400/');
+  const desktop = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/f_auto,q_auto,w_800/');
+  return `${mobile} 400w, ${desktop} 800w`;
+};
+
 const Blog: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -61,6 +68,8 @@ const Blog: React.FC = () => {
               >
                 <img
                   src={post.image}
+                  srcSet={getCloudinarySrcSet(post.image)}
+                  sizes="(max-width: 768px) 400px, 800px"
                   alt={post.title}
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                   width={800}
@@ -136,6 +145,8 @@ const Blog: React.FC = () => {
                     >
                       <img
                         src={post.image}
+                        srcSet={getCloudinarySrcSet(post.image)}
+                        sizes="(max-width: 768px) 400px, 800px"
                         alt={post.title}
                         className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                         width={800}
@@ -238,6 +249,8 @@ const Blog: React.FC = () => {
               ) : (
                 <img
                   src={selectedPost.image}
+                  srcSet={getCloudinarySrcSet(selectedPost.image)}
+                  sizes="(max-width: 768px) 400px, 1200px"
                   alt={selectedPost.title}
                   className="w-full h-full object-cover"
                   width={1200}

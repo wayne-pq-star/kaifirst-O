@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Project, ProjectCategory } from '../types';
 import { PROJECTS } from '../constants';
 
@@ -17,6 +17,13 @@ const getCloudinaryUrl = (url: string, transform: string) => {
     return url.replace(/\/upload\/(v\d+\/.*)/, `/upload/${transform}/$1`);
   }
   return url.replace(/\/upload\/(.*)/, `/upload/${transform}/$1`);
+};
+
+const getCloudinarySrcSet = (url: string) => {
+  if (!url || !url.includes('cloudinary.com')) return undefined;
+  const mobile = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/f_auto,q_auto,w_400/');
+  const desktop = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/f_auto,q_auto,w_1200/');
+  return `${mobile} 400w, ${desktop} 1200w`;
 };
 
 interface GalleryImageProps {
@@ -65,6 +72,8 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ src, alt, index, aspectRati
       )}
       <img 
         src={src} 
+        srcSet={getCloudinarySrcSet(src)}
+        sizes="(max-width: 768px) 400px, 1200px"
         alt={alt}
         className={`w-full h-auto ${lqipSrc ? `transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}` : ''}`}
         width={dimensions.width}
@@ -76,6 +85,77 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ src, alt, index, aspectRati
         decoding="async"
         onLoad={() => setIsLoaded(true)}
       />
+    </div>
+  );
+};
+
+interface WorkCardProps {
+  project: Project;
+  index: number;
+  isHiddenOnMobile: boolean;
+  onSelect: (project: Project) => void;
+}
+
+const WorkCard: React.FC<WorkCardProps> = ({ project, index, isHiddenOnMobile, onSelect }) => {
+  const [isVisible, setIsVisible] = useState(index === 0);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (index === 0) return;
+    if (!cardRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [index]);
+
+  return (
+    <div 
+      ref={cardRef}
+      className={`group cursor-pointer ${isHiddenOnMobile ? 'hidden md:block' : ''}`}
+      onClick={() => onSelect(project)}
+    >
+      <div className="relative overflow-hidden aspect-[4/3] mb-2 bg-zinc-100 dark:bg-zinc-900">
+        {isVisible ? (
+          <img
+            src={getCloudinaryUrl(project.image, 'f_auto,q_auto,w_768')}
+            srcSet={`${getCloudinaryUrl(project.image, 'f_auto,q_auto,w_400')} 400w, ${getCloudinaryUrl(project.image, 'f_auto,q_auto,w_768')} 768w`}
+            sizes="(max-width: 768px) 400px, 768px"
+            alt={project.title}
+            className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${project.customImageClass || ''}`}
+            width={768}
+            height={576}
+            style={{ aspectRatio: '768/576' }}
+            loading={index === 0 ? "eager" : "lazy"}
+            // @ts-ignore
+            fetchPriority={index === 0 ? "high" : "low"}
+            decoding="async"
+          />
+        ) : (
+          <div className="w-full h-full bg-zinc-100 dark:bg-zinc-900" />
+        )}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span className="text-white text-[10px] tracking-[0.4em] border border-white/40 px-6 py-3 uppercase text-center">
+            VIEW GALLERY 作品賞析
+          </span>
+        </div>
+      </div>
+      <div className="flex justify-between items-start">
+        <div className="flex-1 mr-4">
+          <h3 className="text-sm font-medium tracking-widest mb-1 uppercase whitespace-pre-line">{project.title}</h3>
+          <p className="text-[10px] opacity-50 tracking-widest uppercase whitespace-pre-line">{project.location}</p>
+        </div>
+        <span className="text-[10px] opacity-30 font-light flex-shrink-0">{project.year}</span>
+      </div>
     </div>
   );
 };
@@ -140,40 +220,13 @@ const Work: React.FC = () => {
             ['1', 'things-stars-shift', 'guinness-station'].includes(project.id);
             
           return (
-            <div 
-              key={project.id} 
-              className={`group cursor-pointer ${isHiddenOnMobile ? 'hidden md:block' : ''}`}
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className="relative overflow-hidden aspect-[4/3] mb-2 bg-zinc-100 dark:bg-zinc-900">
-              <img
-                src={getCloudinaryUrl(project.image, 'f_auto,q_auto,w_768')}
-                srcSet={`${getCloudinaryUrl(project.image, 'f_auto,q_auto,w_400')} 400w, ${getCloudinaryUrl(project.image, 'f_auto,q_auto,w_768')} 768w`}
-                sizes="(max-width: 768px) 400px, 768px"
-                alt={project.title}
-                className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${project.customImageClass || ''}`}
-                width={768}
-                height={576}
-                style={{ aspectRatio: '768/576' }}
-                loading={i === 0 ? "eager" : "lazy"}
-                // @ts-ignore
-                fetchPriority={i === 0 ? "high" : "low"}
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span className="text-white text-[10px] tracking-[0.4em] border border-white/40 px-6 py-3 uppercase text-center">
-                  VIEW GALLERY 作品賞析
-                </span>
-              </div>
-            </div>
-            <div className="flex justify-between items-start">
-              <div className="flex-1 mr-4">
-                <h3 className="text-sm font-medium tracking-widest mb-1 uppercase whitespace-pre-line">{project.title}</h3>
-                <p className="text-[10px] opacity-50 tracking-widest uppercase whitespace-pre-line">{project.location}</p>
-              </div>
-              <span className="text-[10px] opacity-30 font-light flex-shrink-0">{project.year}</span>
-            </div>
-          </div>
+            <WorkCard 
+              key={project.id}
+              project={project}
+              index={i}
+              isHiddenOnMobile={isHiddenOnMobile}
+              onSelect={setSelectedProject}
+            />
           );
         })}
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const getCloudinaryUrl = (url: string, transform: string) => {
   if (!url || !url.includes('cloudinary.com')) return url;
@@ -18,6 +18,8 @@ interface FeaturedCarouselProps {
 const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [thumbnailsVisible, setThumbnailsVisible] = useState(false);
+  const thumbnailsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const nextSlide = () => {
@@ -33,6 +35,23 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
     return () => clearInterval(timer);
   }, [isPaused, images.length]);
 
+  useEffect(() => {
+    if (!thumbnailsRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setThumbnailsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '100px' }
+    );
+    observer.observe(thumbnailsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const handleThumbnailClick = (index: number) => {
     setCurrentIndex(index);
   };
@@ -41,6 +60,7 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
     <div className="w-full aspect-[2/1] flex bg-zinc-100 dark:bg-zinc-900">
       {/* Left Column - Thumbnails */}
       <div 
+        ref={thumbnailsRef}
         className="w-1/3 h-full overflow-y-auto grid grid-cols-2 content-start scrollbar-hide border-r border-white/10"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -58,17 +78,21 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
               }`}
               onClick={() => handleThumbnailClick(index)}
             >
-              <img 
-                src={thumbSrc} 
-                alt={`Thumbnail ${index + 1}`} 
-                className="w-full h-full object-cover"
-                loading={index < 2 ? "eager" : "lazy"}
-                // @ts-ignore
-                fetchPriority={index === 0 ? "high" : "low"}
-                decoding="async"
-                width={300}
-                height={225}
-              />
+              {thumbnailsVisible ? (
+                <img 
+                  src={thumbSrc} 
+                  alt={`Thumbnail ${index + 1}`} 
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  // @ts-ignore
+                  fetchPriority="low"
+                  decoding="async"
+                  width={300}
+                  height={225}
+                />
+              ) : (
+                <div className="w-full h-full bg-zinc-200 dark:bg-zinc-800" />
+              )}
             </div>
           );
         })}
@@ -81,8 +105,12 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
         onMouseLeave={() => setIsPaused(false)}
       >
         {images.map((img, index) => {
-          const src400 = getCloudinaryUrl(img, 'f_auto,q_auto,w_400');
-          const src960 = getCloudinaryUrl(img, 'f_auto,q_auto,w_960');
+          const isLcp = index === 0;
+          // LCP image uses w_300,q_auto:low for mobile (or w_400,f_auto,q_auto:low)
+          const srcMobile = isLcp 
+            ? getCloudinaryUrl(img, 'f_auto,q_auto:low,w_300')
+            : getCloudinaryUrl(img, 'f_auto,q_auto,w_400');
+          const srcDesktop = getCloudinaryUrl(img, 'f_auto,q_auto,w_960');
 
           return (
             <div
@@ -92,17 +120,17 @@ const FeaturedCarousel: React.FC<FeaturedCarouselProps> = ({ images }) => {
               }`}
             >
               <img 
-                src={src960}
-                srcSet={`${src400} 400w, ${src960} 960w`}
-                sizes="(max-width: 768px) 400px, 960px"
+                src={srcDesktop}
+                srcSet={`${srcMobile} 300w, ${srcDesktop} 960w`}
+                sizes="(max-width: 768px) 300px, 960px"
                 alt={`Featured ${index + 1}`} 
                 className="w-full h-full object-cover"
                 width={960}
                 height={720}
                 style={{ aspectRatio: '960/720' }}
-                loading={index === 0 ? "eager" : "lazy"}
+                loading={isLcp ? "eager" : "lazy"}
                 // @ts-ignore
-                fetchPriority={index === 0 ? "high" : "low"}
+                fetchPriority={isLcp ? "high" : "low"}
                 decoding="async"
               />
             </div>

@@ -1,5 +1,12 @@
 import React from 'react';
 
+const getCloudinarySrcSet = (url: string) => {
+  if (!url || !url.includes('cloudinary.com')) return undefined;
+  const mobile = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/f_auto,q_auto,w_400/');
+  const desktop = url.replace(/\/upload\/(?:[^\/]*\/)?/, '/upload/f_auto,q_auto,w_800/');
+  return `${mobile} 400w, ${desktop} 800w`;
+};
+
 const About: React.FC = () => {
   return (
     <section id="about" className="scroll-mt-24 pt-10 pb-10 px-6 md:px-12 max-w-7xl mx-auto">
@@ -8,7 +15,9 @@ const About: React.FC = () => {
         <div className="flex flex-col space-y-6">
           <div className="relative aspect-[3/4] overflow-hidden">
             <img
-              src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772792060/7688_d6vxiw.png"
+              src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_800/v1772792060/7688_d6vxiw.png"
+              srcSet={getCloudinarySrcSet('https://res.cloudinary.com/dihkqwd43/image/upload/v1772792060/7688_d6vxiw.png')}
+              sizes="(max-width: 768px) 400px, 800px"
               alt="Portrait"
               className="w-full h-full object-cover"
               width={768}
@@ -20,7 +29,9 @@ const About: React.FC = () => {
           </div>
           <div className="w-full">
             <img
-              src="https://res.cloudinary.com/dihkqwd43/image/upload/v1772779989/GI_xfkjka.png"
+              src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_800/v1772779989/GI_xfkjka.png"
+              srcSet={getCloudinarySrcSet('https://res.cloudinary.com/dihkqwd43/image/upload/v1772779989/GI_xfkjka.png')}
+              sizes="(max-width: 768px) 400px, 800px"
               alt="Awards Logos"
               className="w-full h-auto object-contain"
               width={800}
