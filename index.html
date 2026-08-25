@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://res.cloudinary.com">
 
     <!-- LCP 首圖極速預載 (固定 w_600) -->
-    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_600/v1787578632/28_zycfiw.webp?v=116" fetchpriority="high">
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_600/v1787578632/28_zycfiw.webp?v=117" fetchpriority="high">
 
-    <!-- 追蹤腳本：LCP 完成後載入版 (window load 2秒後 或 用戶實際互動時才載，杜絕 TBT 阻塞) -->
+    <!-- 追蹤腳本與地圖：LCP 完成後載入版 (window load 2秒/2.5秒後 或 用戶實際互動時才載，杜絕 TBT 阻塞) -->
     <script>
       function loadScriptsOnce() {
         if (window._tr) return;
@@ -44,14 +44,24 @@
         })(window, document, "clarity", "script", "y79p3cl90l");
       }
 
-      // Lighthouse / 頁面載入完成 2 秒後才載，不影響 TBT
+      function loadMapOnce() {
+        if (window._mapLoaded) return;
+        window._mapLoaded = 1;
+        window.dispatchEvent(new CustomEvent('load-map'));
+      }
+
+      // Lighthouse / 頁面載入完成 2 秒後才載追蹤，2.5 秒載地圖，徹底不影響 TBT
       window.addEventListener('load', function() {
         setTimeout(loadScriptsOnce, 2000);
+        setTimeout(loadMapOnce, 2500);
       });
 
       // 用戶若有實際互動提前載入
       ['scroll', 'touchstart', 'click', 'mousemove', 'keydown'].forEach(function(e) {
-        window.addEventListener(e, loadScriptsOnce, { once: true, passive: true });
+        window.addEventListener(e, function() {
+          loadScriptsOnce();
+          loadMapOnce();
+        }, { once: true, passive: true });
       });
     </script>
 
@@ -118,7 +128,7 @@
     <script type="importmap">
     { "imports": { "react-dom/": "https://esm.sh/react-dom@^19.2.4/", "react/": "https://esm.sh/react@^19.2.4/", "react": "https://esm.sh/react@^19.2.4" } }
     </script>
-  <script type="module" crossorigin src="./assets/index-DvKV-1jh.js"></script>
+  <script type="module" crossorigin src="./assets/index-BCPuEq2Y.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-BbOy0z-Z.css">
 </head>
 <body class="bg-white text-black transition-colors duration-300">
@@ -137,8 +147,8 @@
           <div style="width: 66.666667%; height: 100%; position: relative;">
             <img
               id="lcp-skeleton-img"
-              src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_600/v1787578632/28_zycfiw.webp?v=115"
-              srcset="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_600/v1787578632/28_zycfiw.webp?v=115 600w, https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_960/v1787578632/28_zycfiw.webp?v=115 960w"
+              src="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_600/v1787578632/28_zycfiw.webp?v=117"
+              srcset="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_600/v1787578632/28_zycfiw.webp?v=117 600w, https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto:eco,w_960/v1787578632/28_zycfiw.webp?v=117 960w"
               sizes="(max-width: 768px) 100vw, 50vw"
               alt="Featured 1"
               loading="eager"
