@@ -11,20 +11,20 @@
     <!-- 電腦 LCP 預載 w_960 版，只有電腦下載 -->
     <link rel="preload" as="image" href="https://res.cloudinary.com/dihkqwd43/image/upload/f_auto,q_auto,w_960/v1787578632/28_zycfiw.webp" media="(min-width: 769px)" fetchpriority="high">
 
-    <!-- 追蹤腳本：使用者首次互動 (點擊/滾動/觸控) 或 閒置 (requestIdleCallback) 後才載入，徹底釋放主執行緒 TBT -->
+    <!-- 追蹤腳本：使用者首次互動 (scroll/touchstart/mousemove/click) 或 requestIdleCallback 4秒 動態插入 loadScriptsOnce -->
     <script>
       (function() {
-        var loaded = false;
-        function loadTrackingScripts() {
-          if (loaded) return;
-          loaded = true;
+        var executed = false;
+        function loadScriptsOnce() {
+          if (executed) return;
+          executed = true;
 
-          // 移除互動監聽器
-          ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'].forEach(function(e) {
-            window.removeEventListener(e, loadTrackingScripts, { passive: true });
+          // 移除所有互動監聽器
+          ['scroll', 'touchstart', 'mousemove', 'click', 'keydown'].forEach(function(evt) {
+            window.removeEventListener(evt, loadScriptsOnce, { passive: true });
           });
 
-          // 1. Meta Pixel
+          // 1. Meta Pixel (動態插入)
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
           n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -36,7 +36,7 @@
           fbq('init', '1713570403046657');
           fbq('track', 'PageView');
 
-          // 2. Google Tag (gtag.js)
+          // 2. Google Analytics / gtag (動態插入)
           var gtagScript = document.createElement('script');
           gtagScript.async = true;
           gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-LMRD49DLB8';
@@ -46,7 +46,7 @@
           gtag('js', new Date());
           gtag('config', 'G-LMRD49DLB8');
 
-          // 3. Microsoft Clarity
+          // 3. Microsoft Clarity (動態插入)
           (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -54,16 +54,16 @@
           })(window, document, "clarity", "script", "y79p3cl90l");
         }
 
-        // 綁定首次使用者互動
-        ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'].forEach(function(e) {
-          window.addEventListener(e, loadTrackingScripts, { passive: true, once: true });
+        // 監聽使用者首次互動
+        ['scroll', 'touchstart', 'mousemove', 'click', 'keydown'].forEach(function(evt) {
+          window.addEventListener(evt, loadScriptsOnce, { passive: true, once: true });
         });
 
-        // 備用閒置觸發：等 LCP 與 React 完整畫完後再載入
+        // 閒置 4 秒備用觸發 (等 LCP 與 React 完整畫完後再載)
         if ('requestIdleCallback' in window) {
-          requestIdleCallback(loadTrackingScripts, { timeout: 4000 });
+          requestIdleCallback(loadScriptsOnce, { timeout: 4000 });
         } else {
-          setTimeout(loadTrackingScripts, 3500);
+          setTimeout(loadScriptsOnce, 4000);
         }
       })();
     </script>
@@ -156,7 +156,7 @@
               alt="Featured 1"
               loading="eager"
               fetchpriority="high"
-              decoding="async"
+              decoding="sync"
               style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 960/720;"
               width="960"
               height="720"
